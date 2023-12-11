@@ -19,9 +19,9 @@ export class TrackingOrderComponent implements OnInit {
 
   trackingOrderInfo(orderCode: string) {
     this.trackingOrderService.getTrackingInfo(orderCode).subscribe(data => {
-      this.trackingInfo = data;
-      console.log(this.trackingInfo)
-    }
+        this.trackingInfo = data;
+        console.log(this.trackingInfo)
+      }
     )
   };
 

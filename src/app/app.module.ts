@@ -12,6 +12,7 @@ import { ManagerTransactionComponent } from './component/admin/manager-transacti
 import { ManagerStorageComponent } from './component/admin/manager-storage/manager-storage.component';
 import { DirectorComponent } from './component/admin/director/director.component';
 import { TrackingOrderComponent } from './component/tracking-order/tracking-order.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: TrackingOrderComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [TrackingOrderService],
   bootstrap: [AppComponent]

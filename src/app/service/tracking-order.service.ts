@@ -12,6 +12,7 @@ export class TrackingOrderService {
   constructor(private  httpClient:HttpClient) { }
 
   getTrackingInfo(orderCode:string): Observable<TrackingInfo> {
+    
     return this.httpClient.get<TrackingInfo>(this.baseUrl + "?orderCode=" + orderCode);
   }
 }
