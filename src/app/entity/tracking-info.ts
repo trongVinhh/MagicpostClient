@@ -7,6 +7,7 @@ export class TrackingInfo {
     public phoneNumber: string;
     public nameCurrentStorage: string;
     public date: Date;
+    public status: string;
 
     constructor(
         orderCode: string,
@@ -16,7 +17,8 @@ export class TrackingInfo {
         receiverName: string,
         phoneNumber: string,
         nameCurrentStorage: string,
-        date: Date
+        date: Date,
+        status: string
     ) {
         this.orderCode = orderCode;
         this.totalPrice = totalPrice;
@@ -26,6 +28,7 @@ export class TrackingInfo {
         this.phoneNumber = phoneNumber;
         this.nameCurrentStorage = nameCurrentStorage;
         this.date = date;
+        this.status = status;
     }
     
 }

@@ -14,6 +14,7 @@ import { DirectorComponent } from './component/admin/director/director.component
 import { TrackingOrderComponent } from './component/tracking-order/tracking-order.component';
 import { LoginComponent } from './component/admin/login/login.component';
 import { RegisterComponent } from './component/admin/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tracking', pathMatch: 'full' },
@@ -43,7 +44,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [TrackingOrderService],
   bootstrap: [AppComponent]
