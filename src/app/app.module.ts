@@ -15,10 +15,16 @@ import { TrackingOrderComponent } from './component/tracking-order/tracking-orde
 import { LoginComponent } from './component/admin/login/login.component';
 import { RegisterComponent } from './component/admin/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './component/admin/director/dashboard/dashboard.component';
+import { StorageOfficeComponent } from './component/admin/director/storage-office/storage-office.component';
+import { TransactionOfficeComponent } from './component/admin/director/transaction-office/transaction-office.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tracking', pathMatch: 'full' },
   { path: 'tracking', component: TrackingOrderComponent },
+  { path: 'director/dashboard', component: DashboardComponent },
+  { path: 'manager-storage', component: ManagerStorageComponent },
+  { path: 'manager-transaction', component: ManagerTransactionComponent },
   { path: 'tracking/:id', component: TrackingOrderComponent },
   { path: 'employee-transaction', component: EmployeeTransactionComponent },
   { path: 'employee-storage', component: EmployeeStorageComponent },
@@ -40,6 +46,9 @@ const routes: Routes = [
     DirectorComponent,
     LoginComponent,
     RegisterComponent,
+    DashboardComponent,
+    StorageOfficeComponent,
+    TransactionOfficeComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

@@ -13948,7 +13948,6 @@ be a descendant of the grid when it is being dragged.
   transition: border-left-color 0.3s ease, background-color 0.3s ease;
   color: white;
   border: 1px solid transparent;
-  cursor: pointer;
   /* border-bottom: 1px solid #ddd; */
 }
 
@@ -13966,7 +13965,6 @@ be a descendant of the grid when it is being dragged.
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   width: 40px;
-  color: white;
 }
 
 .app-menu__label {
@@ -13976,9 +13974,7 @@ be a descendant of the grid when it is being dragged.
   flex: 1 1 auto;
   font-size: 15px;
   font-weight: 500;
-  color: white;
 }
-
 
 .treeview.is-expanded [data-toggle='treeview'] {
   border-left-color: rgb(0, 28, 64);
