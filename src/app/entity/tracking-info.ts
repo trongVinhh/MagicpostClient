@@ -9,6 +9,7 @@ export class TrackingInfo {
     public date: Date;
     public status: string;
 
+    
     constructor(
         orderCode: string,
         totalPrice: number,
