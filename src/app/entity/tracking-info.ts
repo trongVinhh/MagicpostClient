@@ -8,6 +8,7 @@ export class TrackingInfo {
     public nameCurrentStorage: string;
     public date: Date;
 
+    
     constructor(
         orderCode: string,
         totalPrice: number,
