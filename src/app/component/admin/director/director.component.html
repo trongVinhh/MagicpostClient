@@ -1,1 +1,25 @@
-<p>director works!</p>
+<!DOCTYPE html>
+<html>
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Employee List</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of storage_offices">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.address}}</td>
+        <td>
+          <ul>
+            <li *ngFor="let employee of item.employees">
+              {{employee.firstName}} {{employee.lastName}}
+            </li>
+          </ul>
+        </td>
+      </tr>  
+    </tbody>
+  </table>
+</html>

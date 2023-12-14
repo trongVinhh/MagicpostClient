@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TrackingOrderService} from './service/tracking-order.service';
+import { TrackingOrderService} from './service/track-order/tracking-order.service';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { EmployeeTransactionComponent } from './component/admin/employee-transaction/employee-transaction.component';
@@ -12,12 +12,22 @@ import { ManagerTransactionComponent } from './component/admin/manager-transacti
 import { ManagerStorageComponent } from './component/admin/manager-storage/manager-storage.component';
 import { DirectorComponent } from './component/admin/director/director.component';
 import { TrackingOrderComponent } from './component/tracking-order/tracking-order.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './component/admin/login/login.component';
+import { RegisterComponent } from './component/admin/register/register.component';
 
 const routes: Routes = [
-  { path: '', component: TrackingOrderComponent },
-  { path: '/tracking?orderCode=:id', component: TrackingOrderComponent }
-]
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'tracking', component: TrackingOrderComponent },
+  { path: 'tracking/:id', component: TrackingOrderComponent },
+  { path: 'employee-transaction', component: EmployeeTransactionComponent },
+  { path: 'employee-storage', component: EmployeeStorageComponent },
+  { path: 'manager-transaction', component: ManagerTransactionComponent },
+  { path: 'manager-storage', component: ManagerStorageComponent },
+  { path: 'director', component: DirectorComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+];
 
 @NgModule({
   declarations: [
@@ -27,13 +37,16 @@ const routes: Routes = [
     EmployeeStorageComponent,
     ManagerTransactionComponent,
     ManagerStorageComponent,
-    DirectorComponent
+    DirectorComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [TrackingOrderService],
   bootstrap: [AppComponent]

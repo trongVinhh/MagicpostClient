@@ -1,19 +1,2 @@
-<h1>Hello</h1>
 
-<form (ngSubmit)="trackOrder()">
-    <input type="text" placeholder="Your tracking number" [(ngModel)] = "orderCode" name="orderCode">
-    <input type="submit" class="btn btn-primary text-white px-4" value="Track Now">
-</form>
-
-<!-- only for test API -->
-<div *ngIf="trackingInfo">
-    <h2>Tracking Information</h2>
-    <p>Order Code: {{ trackingInfo.orderCode }}</p>
-    <p>Total Price: {{ trackingInfo.totalPrice }}</p>
-    <p>Mass: {{ trackingInfo.mass }}</p>
-    <p>Receive Address: {{ trackingInfo.receiveAddress }}</p>
-    <p>Receiver Name: {{ trackingInfo.receiverName }}</p>
-    <p>Phone Number: {{ trackingInfo.phoneNumber }}</p>
-    <p>Name Current Storage: {{ trackingInfo.nameCurrentStorage }}</p>
-    <p>Date: {{ trackingInfo.date | date }}</p>
-</div> 
+<router-outlet></router-outlet>
