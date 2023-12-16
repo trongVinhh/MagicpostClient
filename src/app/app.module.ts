@@ -22,6 +22,9 @@ import { NavigationComponent } from './component/navigation/navigation.component
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'tracking', component: TrackingOrderComponent },
+  { path: 'director/dashboard', component: DashboardComponent },
+  { path: 'manager-storage', component: ManagerStorageComponent },
+  { path: 'manager-transaction', component: ManagerTransactionComponent },
   { path: 'tracking/:id', component: TrackingOrderComponent },
   { path: 'employee-transaction', component: EmployeeTransactionComponent },
   { path: 'employee-storage', component: EmployeeStorageComponent },

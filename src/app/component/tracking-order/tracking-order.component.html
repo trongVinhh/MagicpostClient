@@ -1,5 +1,4 @@
-
-<!-- <div class="site-wrap" id="home-section">
+<div class="site-wrap" id="home-section">
 
     <div class="site-mobile-menu site-navbar-target">
         <div class="site-mobile-menu-header">
@@ -33,10 +32,7 @@
 
                             </li>
 
-                            <li><a href="#why-us-section" class="nav-link">Why Us</a></li>
 
-                            <li><a href="#testimonials-section" class="nav-link">Testimonials</a></li>
-                            <li><a href="#blog-section" class="nav-link">Blog</a></li>
                             <li><a href="#contact-section" class="nav-link">Contact</a></li>
                         </ul>
                     </nav>
@@ -52,7 +48,7 @@
 
     </header>
 
-    <app-tracking-order></app-tracking-order>-->
+    <app-tracking-order></app-tracking-order>
     <!-- <div class="ftco-blocks-cover-1">
         <div class="ftco-cover-1 overlay" style="background-image: url('assets/images/depot_hero_1.jpg')">
             <div class="container">
@@ -62,18 +58,47 @@
                         <p class="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus dolorem eius
                             eligendi
                             esse quod?</p>
-                        <form (ngSubmit)="submitForm()" >
+                        <form [formGroup]="trackingForm" (ngSubmit)="submitForm()">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control" id="orderCode" formControlName="orderCode" placeholder="Your tracking number" >
-                                <button type="submit" class="btn btn-primary text-white px-4" value="Track Now"></button>
+                                <input type="text" class="form-control" placeholder="Your tracking number"
+                                    formControlName="trackingCode">
+                                <input type="submit" class="btn btn-primary text-white px-4" value="Track Now">
                             </div>
+                            <div *ngIf="trackingCodeValid == false">
+                                <h2 style="color: white;">Vui lòng nhập lại mã đơn hàng</h2>
+
+                            </div>
+
                         </form>
+                        <div *ngIf="notFound == false && trackingCodeValid == true && trackingInfo != null"
+                            class="trackingInfo-container">
+                            <h3 class="trackingInfo-title">Thông tin đơn hàng của bạn</h3>
+                            <div class="trackingInfo-details">
+                                <div class="trackingInfo-column">
+                                    <span class="trackingInfo-value">Mã đơn hàng: {{trackingInfo.orderCode}}</span>
+                                    <span class="trackingInfo-label">Người nhận: {{trackingInfo.receiverName}}</span>
+                                    <span class="trackingInfo-label">Số điện thoại: {{trackingInfo.phoneNumber}}</span>
+                                    <span class="trackingInfo-value">Địa chỉ: {{trackingInfo.receiveAddress}}</span>
+                                </div>
+                                <div class="trackingInfo-column">
+
+                                    <span class="trackingInfo-label">Kho: {{trackingInfo.nameCurrentStorage}}</span>
+                                    <span class="trackingInfo-label">Thời gian: {{trackingInfo.date}}</span>
+                                    <span class="trackingInfo-label">Khối lượng: {{trackingInfo.mass}}kg</span>
+                                    <span class="trackingInfo-label">Tổng tiền: {{trackingInfo.totalPrice}} VNĐ</span>
+                                    <span class="trackingInfo-label">Trạng thái: {{trackingInfo.status}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="notFound" class="orderNotFound">
+                            <h3 class="title_notfound">Đơn hàng không tồn tại</h3>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- END .ftco-cover-1 -->
     </div>
-</div> -->
 
 <h1>Hello</h1>
 
