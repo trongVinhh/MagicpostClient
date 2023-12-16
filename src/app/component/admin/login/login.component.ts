@@ -22,8 +22,8 @@ export class LoginComponent {
         // Handle successful login
         console.log('Login successful', response);
         console.log(response.accessToken);
-        localStorage.setItem('token', response.accessToken);
-        this.router.navigate(['/director']); // Redirect to director component
+        sessionStorage.setItem('token', response.accessToken);
+        this.router.navigate(['/director/home']); // Redirect to director component
       },
       (error) => {
         // Handle login error

@@ -6,6 +6,7 @@ import { StorageOffices } from '../../entity/storage-offices';
 import { AuthService } from '../auth/auth.service';
 import { TransactionOffices } from 'src/app/entity/transaction-offices';
 import { Order } from 'src/app/entity/order';
+import { Transaction } from 'src/app/entity/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class DirectorService {
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   // Use accessToken to make a request
-  token = localStorage.getItem('token');
+  token = sessionStorage.getItem('token');
   headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
 
   // Get all storage offices
@@ -32,4 +33,17 @@ export class DirectorService {
   getAllOrdersOfStorage(storageOfficeId: string): Observable<Order[]> {
     return this.httpClient.get<Order[]>(`${this.baseUrl}/storage/${storageOfficeId}/orders`, {headers: this.headers});
   }
+
+  getAllOrders(): Observable<Order[]> {
+    return this.httpClient.get<Order[]>(`${this.baseUrl}/orders`, {headers: this.headers});
+  }
+
+  getAllTransactionsOfTransaction(transactionOfficeId: string): Observable<Order[]> {
+    return this.httpClient.get<Order[]>(`${this.baseUrl}/transactionOffice/${transactionOfficeId}/transactions`, {headers: this.headers});
+  }
+
+  getAllTransactions(): Observable<Transaction[]> {
+    return this.httpClient.get<Transaction[]>(`${this.baseUrl}/transactions`, {headers: this.headers});
+  }
+
 }
