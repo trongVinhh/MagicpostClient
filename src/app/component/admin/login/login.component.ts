@@ -29,14 +29,23 @@ export class LoginComponent implements OnInit {
       const password = this.loginFormGroup.get('password')?.value;
       const credentials = { usernameOrEmail: usernameOrEmail, password: password };
 
-      console.log(usernameOrEmail, password)
       this.authService.login(credentials).subscribe(
         (response) => {
           // Handle successful login
           console.log('Login successful', response);
           console.log(response.accessToken);
+          console.log(response.username)
           sessionStorage.setItem('token', response.accessToken);
-          this.router.navigate(['/director/home']); // Redirect to director component
+          sessionStorage.setItem('username', response.username);
+          sessionStorage.setItem('role', response.role);
+
+          if (sessionStorage.getItem('role') == 'ROLE_ADMIN') {
+            this.router.navigate(['/director/home']);
+          } else if (sessionStorage.getItem('role') == 'ROLE_MANAGER_STORAGE') {
+            this.router.navigate(['/manager-storage/home']);
+          } else if (sessionStorage.getItem('role') == 'ROLE_MANAGER_TRANSACTION') {
+            this.router.navigate(['/manager-transaction/home']);
+          }
         },
         (error) => {
           // Handle login error

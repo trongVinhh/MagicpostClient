@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css" />
 </head>
 
-<body onload="time()" class="app sidebar-mini rtl">
+<body class="app sidebar-mini rtl">
     <!-- Navbar-->
     <header class="app-header">
         <!-- Sidebar toggle button-->
@@ -40,7 +40,7 @@
         <div class="app-sidebar__user">
             <img class="app-sidebar__user-avatar" src="assets/images/me.jpg" width="50px" alt="User Image" />
             <div>
-                <p class="app-sidebar__user-name"><b>Đức Anh</b></p>
+                <p class="app-sidebar__user-name"><b>{{username}}</b></p>
                 <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
             </div>
         </div>
@@ -243,6 +243,7 @@
     <!--===============================================================================================-->
     <script type="text/javascript" src="js/plugins/chart.js"></script>
     <!--===============================================================================================-->
+    
     <script type="text/javascript">
         var data = {
             labels: [

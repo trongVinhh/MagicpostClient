@@ -9,11 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DirectorComponent implements OnInit {
   tmp = '';
-  
+  username: string | null = '';
   storage_offices: StorageOffices[] = [];
   error: string = '';
 
-  constructor(private storageOfficesService: DirectorService) {}
+  constructor(private directorService: DirectorService) {
+    this.username = this.directorService.getUserName();
+  }
 
   ngOnInit(): void {
       this.time();

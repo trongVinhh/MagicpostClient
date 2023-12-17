@@ -13,8 +13,11 @@ export class StorageOfficeComponent implements OnInit {
   error = '';
   storage_offices: StorageOffices[] = [];
   allOrders: Order[] = [];
+  username: string | null = '';
 
-  constructor(private directorService: DirectorService) { }
+  constructor(private directorService: DirectorService) {
+    this.username = this.directorService.getUserName();
+  }
 
   ngOnInit() {
     this.time();

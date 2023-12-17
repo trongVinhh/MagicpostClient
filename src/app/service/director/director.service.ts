@@ -13,9 +13,17 @@ import { Transaction } from 'src/app/entity/transaction';
 })
 export class DirectorService {
   private baseUrl = "http://localhost:8080/api/v1/director"
+  username: string | null = '';
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
+  getUserName() {
+    if (sessionStorage.getItem('role') == 'ROLE_ADMIN') {
+        this.username = sessionStorage.getItem('username');
+    }
+    return this.username;
+  }      
+  
   // Use accessToken to make a request
   token = sessionStorage.getItem('token');
   headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);

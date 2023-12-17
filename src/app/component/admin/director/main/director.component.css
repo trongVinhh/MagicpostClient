@@ -13966,7 +13966,7 @@ be a descendant of the grid when it is being dragged.
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   width: 40px;
-  color: white;
+  color: inherit;
 }
 
 .app-menu__label {
@@ -13976,7 +13976,7 @@ be a descendant of the grid when it is being dragged.
   flex: 1 1 auto;
   font-size: 15px;
   font-weight: 500;
-  color: white;
+  color: inherit;
 }
 
 

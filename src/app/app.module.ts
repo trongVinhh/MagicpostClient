@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { EmployeeTransactionComponent } from './component/admin/employee-transaction/employee-transaction.component';
 import { EmployeeStorageComponent } from './component/admin/employee-storage/employee-storage.component';
 import { ManagerTransactionComponent } from './component/admin/manager-transaction/manager-transaction.component';
-import { ManagerStorageComponent } from './component/admin/manager-storage/manager-storage.component';
+import { ManagerStorageComponent } from './component/admin/manager-storage/home/manager-storage.component';
 import { DirectorComponent } from './component/admin/director/main/director.component';
 import { TrackingOrderComponent } from './component/tracking-order/tracking-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,20 +18,52 @@ import { RegisterComponent } from './component/admin/register/register.component
 import { TransactionOfficeComponent } from './component/admin/director/transaction-office/transaction-office.component';
 import { StorageOfficeComponent } from './component/admin/director/storage-office/storage-office.component';
 import { NavigationComponent } from './component/navigation/navigation.component';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { AuthGuardService } from './service/auth/auth-guard.service';
+import { AuthService } from './service/auth/auth.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'tracking', component: TrackingOrderComponent },
-  { path: 'manager-storage', component: ManagerStorageComponent },
-  { path: 'manager-transaction', component: ManagerTransactionComponent },
   { path: 'tracking/:id', component: TrackingOrderComponent },
   { path: 'employee-transaction', component: EmployeeTransactionComponent },
   { path: 'employee-storage', component: EmployeeStorageComponent },
-  { path: 'manager-transaction', component: ManagerTransactionComponent },
-  { path: 'manager-storage', component: ManagerStorageComponent },
-  { path: 'director/home', component: DirectorComponent },
-  { path: 'director/storage-offices', component: StorageOfficeComponent},
-  { path: 'director/transaction-offices', component: TransactionOfficeComponent},
+
+  { 
+    path: 'manager-transaction/home', 
+    component: ManagerTransactionComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_MANAGER_TRANSACTION'] }
+  },
+
+  { 
+    path: 'manager-storage/home', 
+    component: ManagerStorageComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_MANAGER_STORAGE'] }
+  },
+
+  { 
+    path: 'director/home', 
+    component: DirectorComponent , 
+    canActivate: [AuthGuardService], 
+    data: { expectedRole: ['ROLE_ADMIN'] }
+  },
+
+  { 
+    path: 'director/storage-offices', 
+    component: StorageOfficeComponent, 
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_ADMIN'] }
+  },
+
+  { 
+    path: 'director/transaction-offices', 
+    component: TransactionOfficeComponent, 
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_ADMIN'] }
+  },
+
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];
@@ -56,9 +88,10 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule,
   ],
-  providers: [TrackingOrderService],
+  providers: [TrackingOrderService, AuthGuardService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

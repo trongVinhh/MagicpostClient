@@ -12,8 +12,11 @@ export class TransactionOfficeComponent implements OnInit {
   tmp = '';
   transaction_offices: TransactionOffices[] = [];
   allTransactions: Transaction[] = [];
+  username: string | null = '';
 
-  constructor(private directorService: DirectorService) { }
+  constructor(private directorService: DirectorService) {
+    this.username = this.directorService.getUserName();
+  }
 
   ngOnInit() {
     this.directorService.getAllTransactionOffices().subscribe(
