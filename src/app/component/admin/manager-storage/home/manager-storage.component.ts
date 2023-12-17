@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./manager-storage.component.css']
 })
 export class ManagerStorageComponent {
-
+  
 }
