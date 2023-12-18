@@ -21,6 +21,7 @@ import { NavigationComponent } from './component/navigation/navigation.component
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './service/auth/auth-guard.service';
 import { AuthService } from './service/auth/auth.service';
+import { StatisticalStorageComponent } from './component/admin/manager-storage/statistical-storage/statistical-storage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -39,6 +40,13 @@ const routes: Routes = [
   { 
     path: 'manager-storage/home', 
     component: ManagerStorageComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_MANAGER_STORAGE'] }
+  },
+
+  { 
+    path: 'manager-storage/orders', 
+    component: StatisticalStorageComponent,
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_MANAGER_STORAGE'] }
   },
@@ -81,7 +89,8 @@ const routes: Routes = [
     RegisterComponent,
     NavigationComponent,
     StorageOfficeComponent,
-    TransactionOfficeComponent
+    TransactionOfficeComponent,
+    StatisticalStorageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

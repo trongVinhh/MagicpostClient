@@ -38,7 +38,7 @@ export class DirectorService {
     return this.httpClient.get<TransactionOffices[]>(this.baseUrl + "/transaction-offices", {headers: this.headers});
   }
 
-  getAllOrdersOfStorage(storageOfficeId: string): Observable<Order[]> {
+  getAllOrdersOfStorage(storageOfficeId: string | null): Observable<Order[]> {
     return this.httpClient.get<Order[]>(`${this.baseUrl}/storage/${storageOfficeId}/orders`, {headers: this.headers});
   }
 
