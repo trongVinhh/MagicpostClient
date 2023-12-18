@@ -1,58 +1,60 @@
-import { Component, AfterViewInit } from '@angular/core';
-
-interface Theme {
-  background: string;
-  color: string;
-  primaryColor: string;
-  glassColor: string;
-}
+import { Component, OnInit} from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements AfterViewInit {
-  ngAfterViewInit() {
-    const themes: Theme[] = [
-      {
-        background: "#1A1A2E",
-        color: "#FFFFFF",
-        primaryColor: "#0F3460",
-        glassColor: "#000000"
-      },
-      {
-        background: "#461220",
-        color: "#FFFFFF",
-        primaryColor: "#E94560",
-        glassColor: "#000000"
-      },
-      // ...
-    ];
+export class LoginComponent implements OnInit {
+  error: string = '';
+  loginFormGroup!: FormGroup;
+  constructor(private formBuilder: FormBuilder, 
+              private authService: AuthService,
+              private router: Router) { }
+  
+  ngOnInit(): void {
 
-    const setTheme = (theme: Theme) => {
-      const root = document.querySelector(":root") as HTMLElement;
-      if (root) {
-        root.style.setProperty("--background", theme.background);
-        root.style.setProperty("--color", theme.color);
-        root.style.setProperty("--primary-color", theme.primaryColor);
-        root.style.setProperty("--glass-color", theme.glassColor);
-      }
-    };
+    this.loginFormGroup = this.loginFormGroup = this.formBuilder.group({ // Use the formBuilder to create the FormGroup
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(3)]]
+    });
+  }
 
-    const displayThemeButtons = () => {
-      const btnContainer = document.querySelector(".theme-btn-container") as HTMLElement;
-      if (btnContainer) {
-        themes.forEach((theme) => {
-          const div = document.createElement("div");
-          div.className = "theme-btn";
-          div.style.cssText = `background: ${theme.background}; width: 25px; height: 25px`;
-          btnContainer.appendChild(div);
-          div.addEventListener("click", () => setTheme(theme));
-        });
-      }
-    };
+  onSubmit() {
+    if (this.loginFormGroup.valid) {
+      const usernameOrEmail = this.loginFormGroup.get('username')?.value;
+      const password = this.loginFormGroup.get('password')?.value;
+      const credentials = { usernameOrEmail: usernameOrEmail, password: password };
 
-    displayThemeButtons();
+      this.authService.login(credentials).subscribe(
+        (response) => {
+          // Handle successful login
+          console.log('Login successful', response);
+          console.log(response.accessToken);
+          console.log(response.username)
+          sessionStorage.setItem('token', response.accessToken);
+          sessionStorage.setItem('username', response.username);
+          sessionStorage.setItem('role', response.role);
+
+          if (sessionStorage.getItem('role') == 'ROLE_ADMIN') {
+            this.router.navigate(['/director/home']);
+          } else if (sessionStorage.getItem('role') == 'ROLE_MANAGER_STORAGE') {
+            this.router.navigate(['/manager-storage/home']);
+          } else if (sessionStorage.getItem('role') == 'ROLE_MANAGER_TRANSACTION') {
+            this.router.navigate(['/manager-transaction/home']);
+          }
+        },
+        (error) => {
+          // Handle login error
+          console.error('Login failed', error);
+          this.error = 'Invalid credentials'; // Display error message
+        }
+      );
+    } else {
+      console.log('Form is invalid. Please check the input fields.');
+    }
   }
 }

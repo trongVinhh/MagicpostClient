@@ -5,9 +5,9 @@
                 <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png"
                     alt="illustration" class="illustration" />
                 <h1 class="opacity">LOGIN</h1>
-                <form>
-                    <input type="text" placeholder="USERNAME" />
-                    <input type="password" placeholder="PASSWORD" />
+                <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+                    <input type="text" placeholder="USERNAME" id="username" name="username" formControlName="username" />
+                    <input type="password" placeholder="PASSWORD" formControlName="password"/>
                     <button class="opacity">SUBMIT</button>
                 </form>
                 <div class="register-forget opacity">
@@ -19,3 +19,5 @@
         </div>
         <div class="theme-btn-container"></div>
     </section>
+
+ 

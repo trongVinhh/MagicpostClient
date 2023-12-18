@@ -1,3 +1,5 @@
+import { TrackingInfo } from './entity/tracking-info';
+import { TrackingOrderService } from 'src/app/service/track-order/tracking-order.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,6 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'MagicpostClient';
 }
