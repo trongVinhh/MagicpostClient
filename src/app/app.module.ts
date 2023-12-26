@@ -1,3 +1,4 @@
+import { EmployeeStatisticalComponent } from './component/admin/employee-transaction/employee-statistical/employee-statistical.component';
 import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -6,9 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { TrackingOrderService} from './service/track-order/tracking-order.service';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { EmployeeTransactionComponent } from './component/admin/employee-transaction/employee-transaction.component';
+import { EmployeeTransactionComponent } from './component/admin/employee-transaction/home/employee-transaction.component';
 import { EmployeeStorageComponent } from './component/admin/employee-storage/employee-storage.component';
-import { ManagerTransactionComponent } from './component/admin/manager-transaction/manager-transaction.component';
+import { ManagerTransactionComponent } from './component/admin/manager-transaction/home/manager-transaction.component';
 import { ManagerStorageComponent } from './component/admin/manager-storage/home/manager-storage.component';
 import { DirectorComponent } from './component/admin/director/main/director.component';
 import { TrackingOrderComponent } from './component/tracking-order/tracking-order.component';
@@ -22,17 +23,39 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './service/auth/auth-guard.service';
 import { AuthService } from './service/auth/auth.service';
 import { StatisticalStorageComponent } from './component/admin/manager-storage/statistical-storage/statistical-storage.component';
+import { StatisticalTransactionComponent } from './component/admin/manager-transaction/statistical-transaction/statistical-transaction.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'tracking', component: TrackingOrderComponent },
   { path: 'tracking/:id', component: TrackingOrderComponent },
-  { path: 'employee-transaction', component: EmployeeTransactionComponent },
+  
+  { 
+    path: 'employee-transaction/home', 
+    component: EmployeeTransactionComponent ,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
+  },
+
+  { 
+    path: 'employee-transaction/transactions', 
+    component: EmployeeStatisticalComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
+  },
+  
   { path: 'employee-storage', component: EmployeeStorageComponent },
 
   { 
     path: 'manager-transaction/home', 
     component: ManagerTransactionComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_MANAGER_TRANSACTION'] }
+  },
+
+  { 
+    path: 'manager-transaction/transactions', 
+    component: StatisticalTransactionComponent,
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_MANAGER_TRANSACTION'] }
   },
@@ -90,7 +113,9 @@ const routes: Routes = [
     NavigationComponent,
     StorageOfficeComponent,
     TransactionOfficeComponent,
-    StatisticalStorageComponent
+    StatisticalStorageComponent,
+    StatisticalTransactionComponent,
+    EmployeeStatisticalComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

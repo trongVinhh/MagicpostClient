@@ -1,51 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/entity/order';
-import { StorageId } from 'src/app/entity/storage-id';
-import { StorageOffices } from 'src/app/entity/storage-offices';
+import { TransactionId } from 'src/app/entity/transaction-id';
+import { TransactionOffices } from 'src/app/entity/transaction-offices';
 import { DirectorService } from 'src/app/service/director/director.service';
 import { ManagerService } from 'src/app/service/manager/manager.service';
+
 @Component({
-  selector: 'app-manager-storage',
-  templateUrl: './manager-storage.component.html',
-  styleUrls: ['./manager-storage.component.css']
+  selector: 'app-manager-transaction',
+  templateUrl: './manager-transaction.component.html',
+  styleUrls: ['./manager-transaction.component.css']
 })
-export class ManagerStorageComponent implements OnInit {
+export class ManagerTransactionComponent implements OnInit {
   tmp = '';
-  storage!: StorageOffices;
+  transaction!: TransactionOffices;
   username: string | null = '';
-  storage_id!: StorageId;
+  transaction_id!: TransactionId;
 
   constructor(private directorService: DirectorService, private managerService: ManagerService) { 
     this.username = this.managerService.getUserName();
   }
 
-  //test in dữ liệu oke
-  printTable() {
-    let tab = document.getElementById('sampleTable') as HTMLTableElement;
-    let win = window.open('', '', 'height=700,width=700');
-    if (win) {
-      win.document.write(tab.outerHTML);
-      win.document.close();
-      win.print();
-    }
-  }
-
   ngOnInit(): void {
     this.time();
 
-    this.managerService.getStorageIdByUsername(this.managerService.getUserName()).subscribe(
+    this.managerService.getTransactionIdByUsername(this.managerService.getUserName()).subscribe(
       data => {
         console.log(data);
-        this.storage_id = data;
-        console.log(this.storage_id.officeId);
+        this.transaction_id = data;
+        console.log(this.transaction_id.officeId);
 
         // Get all orders of a storage
-        this.managerService.getStorageByStorageId(this.storage_id.officeId).subscribe(
+        this.managerService.getTransactionByTransactionId(this.transaction_id.officeId).subscribe(
           data => {
             console.log(data);
-            this.storage = data;
-            this.storage.employees.forEach(employee => {
-                console.log(employee.role[0].name);
+            this.transaction = data;
+            console.log(this.transaction);
+            this.transaction.employees.forEach(employee => {
+              
+                console.log(employee.role[0].id);
               
             });
           }

@@ -9,5 +9,5 @@ export interface Employee {
   address: string;
   username: string;
   password: string;
-  role: Role;
+  role: Role[];
 }

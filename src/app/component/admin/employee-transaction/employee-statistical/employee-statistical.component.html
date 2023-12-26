@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="manager-storage.component.css">
+  <link rel="stylesheet" type="text/css" href="employee-statistical.component.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -31,7 +31,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="employee-storage.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
@@ -39,129 +39,80 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../image/me.jpg" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../employee-transaction/image/me.jpg" width="50px"
         alt="User Image">
       <div>
         <p class="app-sidebar__user-name"><b>{{username}}</b></p>
-        <p class="app-sidebar__user-designation">Trưởng điểm tập kết</p>
+        <p class="app-sidebar__user-designation">Nhân viên giao dịch</p>
       </div>
     </div>
     <hr>
     <ul class="app-menu">
       
-      <li><a class="app-menu__item active" href="manager-storage.component.html" routerLink="/manager-storage/home"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-        <li><a class="app-menu__item " href="../statistical-storage/statistical-storage.component.html" routerLink="/manager-storage/orders"><i class='app-menu__icon bx bx-id-card'></i>
-            <span class="app-menu__label">Thống kê hàng hóa</span></a></li>
+      <li><a class="app-menu__item " href="../home/employee-transaction.component.html" routerLink="/employee-transaction/home"><i class='app-menu__icon bx bx-task'></i>
+          <span class="app-menu__label">Tạo đơn chuyển đi</span></a></li>
+        <li><a class="app-menu__item active" href="statistical-transaction-order.component.html" routerLink="/employee-transaction/transactions"><i class='app-menu__icon bx bx-user-voice'></i>
+            <span class="app-menu__label">Thống kê đơn hàng</span></a></li>
       
     </ul>
   </aside>
   <main class="app-content">
     <div class="app-title">
-      <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhân viên hiện có tại điểm</b></a></li>
-      </ul>
-      <div id="clock"></div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="tile">
-          <div class="tile-body">
-
-            <div class="row element-button">
-              <div class="col-sm-2">
-
-                <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i class="fas fa-plus"></i>
-                  Tạo mới nhân viên</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
-                    class="fas fa-file-upload"></i> Tải từ file</a>
-              </div>
-
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm print-file" type="button" title="In" (click)="printTable()"><i
-                    class="fas fa-print"></i> In dữ liệu</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
-                    class="fas fa-copy"></i> Sao chép</a>
-              </div>
-
-              <div class="col-sm-2">
-                <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
-                    class="fas fa-file-pdf"></i> Xuất PDF</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
-              </div>
-            </div>
-            <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
-              id="sampleTable">
-              <thead>
-                <tr>
-                  <th width="10"><input type="checkbox" id="all"></th>
-                  <th>ID nhân viên</th>
-                  <th width="150">Họ và tên</th>
-                  <th width="20">Ảnh thẻ</th>
-                  <th width="250">Địa chỉ</th>
-                  <th>Ngày sinh</th>
-                  <th>SĐT</th>
-                  <th>Email</th>
-                  <th>Chức vụ</th>
-                  <th width="100">Tính năng</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>#CD12837</td>
-                  <td>Hồ Thị Thanh Ngân</td>
-                  <td><img class="img-card-person" src="/img-anhthe/1.jpg" alt=""></td>
-                  <td>155-157 Trần Quốc Thảo, Quận 3, Hồ Chí Minh </td>
-                  <td>12/02/1999</td>
-                  <td>0926737168</td>
-                  <td>Email</td>
-                  <td>Bán hàng</td>
-                  <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                      onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                      data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr *ngFor="let employee of storage.employees">
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>{{employee.id}}</td>
-                  <td>{{employee.firstName}} {{employee.lastName}}</td>
-                  <td><img class="img-card-person" src="/img-anhthe/1.jpg" alt=""></td>
-                  <td>{{employee.address}}</td>
-                  <td>Ngày sinh</td>
-                  <td>{{employee.phone}}</td>
-                  <td>{{employee.email}}</td>
-                  <td>{{employee.role[0].name}}</td>
-                  <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                      onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                      data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
+        <ul class="app-breadcrumb breadcrumb side">
+          <li class="breadcrumb-item active"><a href="#"><b>Thống kê hàng hóa tại điểm</b></a></li>
+        </ul>
+        <div id="clock">{{tmp}}</div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-12">
+    
+                 <div class="tile">
+                    <div class="tile-body">
+                      
+                          <div >
+                              <h3 class="tile-title">Đơn hàng hiện đang tại điểm</h3>
+                          </div>
+                          <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+                          id="sampleTable">
+                            <thead>
+                              <tr>
+                                <th width="15"><input type="checkbox" id="all"></th>
+                                <th width="20">ID đơn hàng</th>
+                                <th width="50">Khách hàng</th>
+                                <th>Khối lượng</th>
+                                <th>Tổng tiền</th>
+                                <th>Tình trạng</th>
+                                <th>Tính năng</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                <td>MD0837</td>
+                                <td>Triệu Thanh Phú</td>
+                                <td>2</td>
+                                <td>9.400.000 đ</td>
+                                <td><span class="badge bg-success">Nhận</span></td>
+                                <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
+                                  <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
+                              </tr>
+                              <tr *ngFor="let transaction of allTransactions, let index = index">
+                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                <td>{{transaction.orderCode}}</td>
+                                <td>{{transaction.customerDto.firstName}} {{transaction.customerDto.lastName}}</td>
+                                <td>{{transaction.mass}}</td>
+                                <td>{{transaction.totalPrice}}</td>                 
+                                <td><span class="badge bg-danger">Gửi</span></td>
+                                <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
+                                  <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                       </div>
         </div>
       </div>
-    </div>
   </main>
 
   <!--
@@ -278,6 +229,47 @@
       e.stopImmediatePropagation();
     });
 
+
+    //Thời Gian
+    function time() {
+      var today = new Date();
+      var weekday = new Array(7);
+      weekday[0] = "Chủ Nhật";
+      weekday[1] = "Thứ Hai";
+      weekday[2] = "Thứ Ba";
+      weekday[3] = "Thứ Tư";
+      weekday[4] = "Thứ Năm";
+      weekday[5] = "Thứ Sáu";
+      weekday[6] = "Thứ Bảy";
+      var day = weekday[today.getDay()];
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      nowTime = h + " giờ " + m + " phút " + s + " giây";
+      if (dd < 10) {
+        dd = '0' + dd
+      }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+        '</span>';
+      document.getElementById("clock").innerHTML = tmp;
+      clocktime = setTimeout("time()", "1000", "Javascript");
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+    }
     //In dữ liệu
     var myApp = new function () {
       this.printTable = function () {
