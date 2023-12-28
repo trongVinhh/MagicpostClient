@@ -28,7 +28,7 @@ export class TrackingOrderComponent implements OnInit {
   }
 
 
-  async trackingOrderInfo(orderCode: string) {
+  trackingOrderInfo(orderCode: string) {
     this.trackingOrderService.getTrackingInfo(orderCode).subscribe(
       data => {
         this.trackingInfo = data;
@@ -39,6 +39,7 @@ export class TrackingOrderComponent implements OnInit {
       }
     );
   }
+  
   async submitForm() {
     if (this.trackingForm.valid) {
       const trackingCode = this.trackingForm.get('trackingCode')?.value;

@@ -6,12 +6,15 @@ import { StorageOffices } from 'src/app/entity/storage-offices';
 import { Observable } from 'rxjs';
 import { TransactionId } from 'src/app/entity/transaction-id';
 import { TransactionOffices } from 'src/app/entity/transaction-offices';
+import { Customer } from 'src/app/entity/customer';
+import { Transaction } from 'src/app/entity/transaction';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-  private baseUrl = "http://localhost:8080/api/v1/manager";
+  private baseUrl = "http://localhost:8080/api/v1/employee";
+  private customerUrl = "http://localhost:8080/api/v1/customer";
 
   //API tỉnh thành phố 
   private baseUrlCity = "https://thongtindoanhnghiep.co/api/city";
@@ -28,6 +31,21 @@ export class EmployeeService {
     }
     return this.username;
   }
+
+  createCustomer(customer: Customer): Observable<Customer> {
+    return this.httpClient.post<Customer>(`${this.customerUrl}`, customer, { headers: this.headers })
+  }
+
+  createTransaction(transaction: Transaction): Observable<Transaction> {
+    return this.httpClient.post<Transaction>(`http://localhost:8080/api/v1/transaction/create`, transaction, { headers: this.headers})
+  }
+
+  getCustomerByPhone(phone: string): Observable<Customer[]> {
+    return this.httpClient.get<Customer[]>(`${this.customerUrl}/phone?phone=${phone}`, { headers: this.headers });
+  }
+  
+
+
 
   // getStorageIdByUsername(username: string | null): Observable<StorageId> {
   //   return this.httpClient.get<StorageId>(`${this.baseUrl}/getStorageIdByUsername?username=${username}`, {headers: this.headers});

@@ -24,6 +24,7 @@ import { AuthGuardService } from './service/auth/auth-guard.service';
 import { AuthService } from './service/auth/auth.service';
 import { StatisticalStorageComponent } from './component/admin/manager-storage/statistical-storage/statistical-storage.component';
 import { StatisticalTransactionComponent } from './component/admin/manager-transaction/statistical-transaction/statistical-transaction.component';
+import { EmployeeManagementComponent } from './component/admin/director/employee-management/employee-management.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -115,7 +116,8 @@ const routes: Routes = [
     TransactionOfficeComponent,
     StatisticalStorageComponent,
     StatisticalTransactionComponent,
-    EmployeeStatisticalComponent
+    EmployeeStatisticalComponent,
+    EmployeeManagementComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

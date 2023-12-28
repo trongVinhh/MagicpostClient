@@ -54,7 +54,7 @@
             class="app-menu__label">Tạo đơn hàng mới</span></a></li>
       <li><a class="app-menu__item " href="../employee-statistical/employee-statistical.component.html"
           routerLink="/employee-transaction/transactions"><i class='app-menu__icon bx bx-user-voice'></i><span
-            class="app-menu__label">Thống kê đơn hàng</span></a></li>
+            class="app-menu__label">Thống kê đơn hàng gửi đến điểm giao dịch</span></a></li>
 
     </ul>
   </aside>
@@ -70,22 +70,27 @@
         <div class="tile">
           <h2 class="tile-title">Tạo đơn hàng mới của khách hàng</h2>
           <div class="tile-body">
-            <form class="row">
+            <form  [formGroup]="orderForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column;" >
 
-              <!-- Thông tin người gửi -->
-              <div class="col-md-6 row">
+              <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                <!-- Thông tin người gửi -->
+              <div class="col-md-6" style="display: flex; flex-direction: row; flex-wrap: wrap; border-right: 1px solid;">
                 <div class="form-group  col-md-7">
                   <label class="control-label">Tên người gửi</label>
-                  <input class="form-control" type="text">
+                  <input class="form-control" type="text" formControlName="senderName">
                 </div>
                 <div class="form-group col-md-5">
                   <label class="control-label">Số điện thoại người gửi</label>
-                  <input class="form-control" type="number">
+                  <input class="form-control" type="string" formControlName="senderPhone">
+                </div>
+                <div class="form-group col-md-8">
+                  <label class="control-label">Email</label>
+                  <input class="form-control" type="email" formControlName="senderEmail">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="exampleSelect1" class="control-label">Miền</label>
                   <select class="form-control" id="exampleSelect1" name="region" [(ngModel)]="regionCode"
-                    (ngModelChange)="getProvinceList()">
+                    (ngModelChange)="getProvinceList()" formControlName="senderRegion">
                     <option [value]="0">-- Chọn miền --</option>
                     <option [value]=(1)>Miền Bắc</option>
                     <option [value]=(2)>Miền Trung</option>
@@ -95,24 +100,24 @@
                 <div class="form-group col-md-6">
                   <label for="exampleSelect1" class="control-label">Tỉnh/Thành phố</label>
                   <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="provinceCode"
-                    (ngModelChange)="getDistrictList()">
+                    (ngModelChange)="getDistrictList()" formControlName="senderProvince">
                     <option [value]="0">-- Chọn tỉnh/thành phố --</option>
-                    <option *ngFor="let province of filteredProvinceList" [value]="province.code">{{province.name}}
+                    <option *ngFor="let province of filteredProvinceList" [value]="province.name">{{province.name}}
                     </option>
                   </select>
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Quận/Huyện</label>
                   <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="districtCode"
-                    (ngModelChange)="getWardList()">
+                    (ngModelChange)="getWardList()" formControlName="senderDistrict">
                     <option [value]="0">-- Chọn quận/huyện --</option>
-                    <option *ngFor="let district of filteredDistrictList" [value]="district.code">{{district.name}}
+                    <option *ngFor="let district of filteredDistrictList" [value]="district.name">{{district.name}}
                     </option>
                   </select>
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Phường/Xã</label>
-                  <select class="form-control" id="exampleSelect1" name="ward">
+                  <select class="form-control" id="exampleSelect1" name="ward" formControlName="senderWard">
                     <option>-- Chọn phường/xã --</option>
                     <option *ngFor="let ward of filteredWardList">{{ward.name}}</option>
                   </select>
@@ -120,19 +125,19 @@
               </div>
 
               <!-- Thông tin người nhận -->
-              <div class="col-md-6 row">
+              <div class="col-md-6" style="display: flex; flex-direction: row; flex-wrap: wrap;">
                 <div class="form-group  col-md-7">
                   <label class="control-label">Tên người nhận</label>
-                  <input class="form-control" type="text">
+                  <input class="form-control" type="text" formControlName="receiverName">
                 </div>
                 <div class="form-group  col-md-5">
                   <label class="control-label">Số điện thoại người nhận</label>
-                  <input class="form-control" type="number">
+                  <input class="form-control" type="text" formControlName="receiverPhone">
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Miền</label>
                   <select class="form-control" id="exampleSelect1" name="region" [(ngModel)]="regionCode"
-                    (ngModelChange)="getProvinceList()">
+                    (ngModelChange)="getProvinceList()" formControlName="receiverRegion">
                     <option [value]="0">-- Chọn miền --</option>
                     <option [value]=(1)>Miền Bắc</option>
                     <option [value]=(2)>Miền Trung</option>
@@ -142,29 +147,31 @@
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Tỉnh/Thành phố</label>
                   <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="provinceCode"
-                    (ngModelChange)="getDistrictList()">
+                    (ngModelChange)="getDistrictList()" formControlName="receiverProvince">
                     <option [value]="0">-- Chọn tỉnh/thành phố --</option>
-                    <option *ngFor="let province of filteredProvinceList" [value]="province.code">{{province.name}}
+                    <option *ngFor="let province of filteredProvinceList" [value]="province.name">{{province.name}}
                     </option>
                   </select>
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Quận/Huyện</label>
                   <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="districtCode"
-                    (ngModelChange)="getWardList()">
+                    (ngModelChange)="getWardList()" formControlName="receiverDistrict">
                     <option [value]="0">-- Chọn quận/huyện --</option>
-                    <option *ngFor="let district of filteredDistrictList" [value]="district.code">{{district.name}}
+                    <option *ngFor="let district of filteredDistrictList" [value]="district.name">{{district.name}}
                     </option>
                   </select>
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Phường/Xã</label>
-                  <select class="form-control" id="exampleSelect1" name="ward">
+                  <select class="form-control" id="exampleSelect1" name="ward" formControlName="receiverWard"> 
                     <option>-- Chọn phường/xã --</option>
                     <option *ngFor="let ward of filteredWardList">{{ward.name}}</option>
                   </select>
                 </div>
               </div>
+              </div>
+              
 
               <div class="col-md-12 mt-5 mb-3">
                 <h2>Thông tin đơn hàng</h2>
@@ -173,12 +180,12 @@
               <div class="col-md-12 row">
                 <div class="form-group col-md-4">
                   <label class="control-label">ID đơn hàng ( Nếu không nhập sẽ tự động phát sinh )</label>
-                  <input class="form-control" type="text">
+                  <input class="form-control" type="text" formControlName="orderCode">
                 </div>
 
                 <div class="form-group  col-md-4">
                   <label class="control-label"> Loại hàng gửi </label>
-                  <select class="form-control" id="exampleSelect1" name="type_package">
+                  <select class="form-control" id="exampleSelect1" name="type_package" formControlName="packageType">
                     <option>-- Chọn loại hàng gửi --</option>
                     <option>Tài liệu</option>
                     <option>Hàng Hoá</option>
@@ -187,18 +194,24 @@
 
                 <div class="form-group  col-md-4">
                   <label class="control-label">Khối lượng</label>
-                  <input class="form-control" type="number">
+                  <input class="form-control" type="number" formControlName="mass">
                 </div>
 
                 <div class="form-group  col-md-4">
                   <label class="control-label">Cước chính</label>
-                  <input class="form-control" type="number">
+                  <input class="form-control" type="number" formControlName="postage">
                 </div>
 
                 <div class="form-group  col-md-4">
                   <label class="control-label">Phụ phí</label>
-                  <input class="form-control" type="number">
+                  <input class="form-control" type="number" formControlName="extraFee">
                 </div>
+
+                <div class="form-group  col-md-4">
+                  <label class="control-label">Tổng thu</label>
+                  <input class="form-control" type="number" formControlName="totalPrice">
+                </div>
+
                 <div class="form-group  col-md-6">
                   <label class="control-label">Ghi chú đơn hàng</label>
                   <textarea class="form-control" rows="4"></textarea>
@@ -206,14 +219,16 @@
 
               </div>
 
+              <div style="text-align: right;">
+                <button class="btn btn-save mx-2" type="submit">Lưu lại</button>
+                <a class="btn btn-cancel" href="">Hủy bỏ</a>
+              </div>
+
             </form>
           </div>
 
 
-          <div style="text-align: right;">
-            <button class="btn btn-save mx-2" type="button">Lưu lại</button>
-            <a class="btn btn-cancel" href="">Hủy bỏ</a>
-          </div>
+          
 
         </div>
       </div>

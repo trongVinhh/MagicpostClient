@@ -1,28 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Customer } from 'src/app/entity/customer';
 import District from 'src/app/entity/district';
+import { Employee } from 'src/app/entity/employee';
 import Province from 'src/app/entity/province';
-import { Transaction } from 'src/app/entity/transaction';
 import Ward from 'src/app/entity/ward';
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import { EmployeeService } from 'src/app/service/employee/employee.service';
 
 @Component({
-  selector: 'app-employee-transaction',
-  templateUrl: './employee-transaction.component.html',
-  styleUrls: ['./employee-transaction.component.css']
+  selector: 'app-employee-management',
+  templateUrl: './employee-management.component.html',
+  styleUrls: ['./employee-management.component.css']
+  
 })
-export class EmployeeTransactionComponent implements OnInit {
-  orderForm: FormGroup = new FormGroup({});
-  newCustomer!: Customer;
-  newOrder!: Transaction;
-  createdCustomer!: Customer;
+export class EmployeeManagementComponent implements OnInit {
+
+  employeeForm: FormGroup = new FormGroup({});
+  newEmployee!: Employee;
+  createdCustomer!: Employee;
 
   constructor(private httpClient: HttpClient, private formBuilder: FormBuilder, private employeeService: EmployeeService, private customerService: CustomerService) { 
-    this.newCustomer = {} as Customer;
-    this.newOrder = {} as Transaction;
+    this.newEmployee = {} as Employee;
   }
 
   ngOnInit(): void {
@@ -30,7 +29,7 @@ export class EmployeeTransactionComponent implements OnInit {
     this.getAllDistrict();
     this.getAllWard();
     
-    this.orderForm = this.formBuilder.group({
+    this.employeeForm = this.formBuilder.group({
       senderName: [''],
       senderPhone: [''],
       senderEmail: [''],
@@ -54,38 +53,24 @@ export class EmployeeTransactionComponent implements OnInit {
   }
 
   onSubmit() {
-    this.newCustomer.firstName = "Trần";
-    this.newCustomer.lastName = this.orderForm.get('senderName')?.value;
-    this.newCustomer.phone = this.orderForm.get('senderPhone')?.value;
-    this.newCustomer.address = this.orderForm.get('senderWard')?.value + " - " + this.orderForm.get('senderDistrict')?.value + " - " + this.orderForm.get('senderProvince')?.value;
-    this.newCustomer.email = this.orderForm.get('senderEmail')?.value;
-    console.log(this.orderForm.get('senderEmail')?.value);
-    this.newOrder.orderCode = this.orderForm.get('orderCode')?.value;
-    this.newOrder.packageType = this.orderForm.get('packageType')?.value;
-    this.newOrder.mass = this.orderForm.get('mass')?.value;
-    this.newOrder.postage = this.orderForm.get('postage')?.value;
-    this.newOrder.totalPrice = this.orderForm.get('totalPrice')?.value;
-    this.newOrder.receiveAddress = this.orderForm.get('receiverWard')?.value + " - " + this.orderForm.get('receiverDistrict')?.value + " - " + this.orderForm.get('receiverProvince')?.value;
-    this.newOrder.receiverName = this.orderForm.get('receiverName')?.value;
-    this.newOrder.phoneNumber = this.orderForm.get('receiverPhone')?.value;
-    this.newOrder.employeeId = sessionStorage.getItem('employeeId') || "";
-    this.newOrder.transactionOfficeId = "1";
+    this.newEmployee.firstName = "Trần";
+    this.newEmployee.lastName = this.employeeForm.get('senderName')?.value;
+    this.newEmployee.phone = this.employeeForm.get('senderPhone')?.value;
+    this.newEmployee.address = this.employeeForm.get('senderWard')?.value + " - " + this.employeeForm.get('senderDistrict')?.value + " - " + this.employeeForm.get('senderProvince')?.value;
+    this.newEmployee.email = this.employeeForm.get('senderEmail')?.value;
+    console.log(this.employeeForm.get('senderEmail')?.value);
 
-    console.log(this.newOrder)
-    this.createNewOrder(this.newCustomer, this.newOrder);
+    // this.createNewEmployee(this.newEmployee);
 
   }
 
 
-  createNewOrder(customer: Customer, order: Transaction) {
-    order.customerDto = customer;
-    this.employeeService.createTransaction(order).subscribe(response => {
-      console.log('Transaction created', response);
-    });
-  }
-  
+  // createNewEmployee(employee: Employee) {
+  //   this.employeeService.createTransaction(order).subscribe(response => {
+  //     console.log('Transaction created', response);
+  //   });
+  // }
 
-  //Api tỉnh thành 
   private baseUrl = "https://provinces.open-api.vn/api/";
   regionList = ["Miền Bắc", "Miền Trung", "Miền Nam"];
   regionCode: number = 0;
@@ -131,7 +116,7 @@ export class EmployeeTransactionComponent implements OnInit {
   
   getDistrictList() {
     this.filteredDistrictList = this.districtList.filter((district: District) => {
-      return district.province_code == this.getProvinceCode(this.orderForm.get('senderProvince')?.value);
+      return district.province_code == this.getProvinceCode(this.employeeForm.get('senderProvince')?.value);
     });
 
     console.log(this.filteredDistrictList);
@@ -148,7 +133,7 @@ export class EmployeeTransactionComponent implements OnInit {
 
   getWardList() {
     this.filteredWardList = this.wardList.filter((ward: Ward) => {
-      return ward.district_code == this.getDistrictCode(this.orderForm.get('senderDistrict')?.value);
+      return ward.district_code == this.getDistrictCode(this.employeeForm.get('senderDistrict')?.value);
     });
 
     console.log(this.filteredWardList);
@@ -174,6 +159,5 @@ export class EmployeeTransactionComponent implements OnInit {
       this.wardList = data;
     })
   }
-
 
 }

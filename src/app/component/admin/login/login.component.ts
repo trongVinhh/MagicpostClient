@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('token', response.accessToken);
           sessionStorage.setItem('username', response.username);
           sessionStorage.setItem('role', response.role);
+          sessionStorage.setItem('employeeId', response.employeeId);
 
           if (sessionStorage.getItem('role') == 'ROLE_ADMIN') {
             this.router.navigate(['/director/home']);

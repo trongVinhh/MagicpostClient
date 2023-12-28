@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Danh sách đơn hàng | Quản trị Admin</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="./employee-management.component.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- or -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+</head>
+
+<body class="app sidebar-mini rtl">
+  <!-- Navbar-->
+  <header class="app-header">
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+      aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+
+
+      <!-- User Menu-->
+      <li><a class="app-nav__item" href="employee-transaction.component.html"><i
+            class='bx bx-log-out bx-rotate-180'></i> </a>
+
+      </li>
+    </ul>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../employee-transaction/image/me.jpg"
+        width="50px" alt="User Image">
+      <div>
+        <p class="app-sidebar__user-name"><b>Đức Anh</b></p>
+        <p class="app-sidebar__user-designation">Nhân viên giao dịch</p>
+      </div>
+    </div>
+    <hr>
+    <ul class="app-menu">
+      <li>
+          <a class="app-menu__item active" href="#" routerLink="/director/home">
+              <i class="app-menu__icon bx bx-tachometer"></i>
+              <span class="app-menu__label">Bảng điều khiển</span>
+          </a>
+      </li>
+      <li>
+          <a class="app-menu__item" href="#" routerLink="/director/transaction-offices">
+              <i class="app-menu__icon bx bx-id-card"></i>
+              <span class="app-menu__label">Quản lý điểm giao dịch</span>
+          </a>
+      </li>
+      <li>
+          <a class="app-menu__item" href="#" routerLink="/director/storage-offices">
+              <i class="app-menu__icon bx bx-user-voice"></i>
+              <span class="app-menu__label">Quản lý điểm tập kết</span>
+          </a>
+      </li>
+      <li>
+        <a class="app-menu__item" href="#" routerLink="/director/storage-offices">
+            <i class="app-menu__icon bx bx-user-voice"></i>
+            <span class="app-menu__label">Quản lý điểm tập kết</span>
+        </a>
+    </li>
+  </ul>
+  </aside>
+  <main class="app-content">
+    <div class="app-title">
+      <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item">Danh sách đơn hàng</li>
+        <li class="breadcrumb-item"><a href="#">Thêm đơn hàng</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <h2 class="tile-title">Tạo đơn hàng mới của khách hàng</h2>
+          <div class="tile-body">
+            <form class="row" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+                <!-- Thông tin người gửi -->
+                <div class="form-group  col-md-6">
+                  <label class="control-label">Tên nhân viên</label>
+                  <input class="form-control" type="text" formControlName="senderName">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Số điện thoại</label>
+                  <input class="form-control" type="string" formControlName="senderPhone">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Email</label>
+                  <input class="form-control" type="email" formControlName="senderEmail">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Tên đăng nhập</label>
+                  <input class="form-control" type="email" formControlName="senderEmail">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Mật khẩu</label>
+                  <input class="form-control" type="email" formControlName="senderEmail">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="exampleSelect1" class="control-label">Miền</label>
+                  <select class="form-control" id="exampleSelect1" name="region" [(ngModel)]="regionCode"
+                    (ngModelChange)="getProvinceList()" formControlName="senderRegion">
+                    <option [value]="0">-- Chọn miền --</option>
+                    <option [value]=(1)>Miền Bắc</option>
+                    <option [value]=(2)>Miền Trung</option>
+                    <option [value]=(3)>Miền Nam</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="exampleSelect1" class="control-label">Tỉnh/Thành phố</label>
+                  <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="provinceCode"
+                    (ngModelChange)="getDistrictList()" formControlName="senderProvince">
+                    <option [value]="0">-- Chọn tỉnh/thành phố --</option>
+                    <option *ngFor="let province of filteredProvinceList" [value]="province.name">{{province.name}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group  col-md-6">
+                  <label for="exampleSelect1" class="control-label">Quận/Huyện</label>
+                  <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="districtCode"
+                    (ngModelChange)="getWardList()" formControlName="senderDistrict">
+                    <option [value]="0">-- Chọn quận/huyện --</option>
+                    <option *ngFor="let district of filteredDistrictList" [value]="district.name">{{district.name}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group  col-md-6">
+                  <label for="exampleSelect1" class="control-label">Phường/Xã</label>
+                  <select class="form-control" id="exampleSelect1" name="ward" formControlName="senderWard">
+                    <option>-- Chọn phường/xã --</option>
+                    <option *ngFor="let ward of filteredWardList">{{ward.name}}</option>
+                  </select>
+                </div>
+              
+              <div style="text-align: right;">
+                <button class="btn btn-save mx-2" type="submit">Lưu lại</button>
+                <a class="btn btn-cancel" href="">Hủy bỏ</a>
+              </div>
+
+            </form>
+          </div>
+
+
+          
+
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Essential javascripts for application to work-->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="js/plugins/pace.min.js"></script>
+</body>
+
+</html>

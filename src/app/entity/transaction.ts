@@ -12,4 +12,6 @@ export interface Transaction {
   transactionOfficeId: string;
   customerDto: Customer;
   date: Date;
+  packageType: string;
+  postage: number;
 }
