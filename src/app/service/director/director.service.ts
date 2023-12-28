@@ -46,8 +46,8 @@ export class DirectorService {
     return this.httpClient.get<Order[]>(`${this.baseUrl}/orders`, {headers: this.headers});
   }
 
-  getAllTransactionsOfTransaction(transactionOfficeId: string): Observable<Order[]> {
-    return this.httpClient.get<Order[]>(`${this.baseUrl}/transactionOffice/${transactionOfficeId}/transactions`, {headers: this.headers});
+  getAllTransactionsOfTransaction(transactionOfficeId: string): Observable<Transaction[]> {
+    return this.httpClient.get<Transaction[]>(`${this.baseUrl}/transactionOffice/${transactionOfficeId}/transactions`, {headers: this.headers});
   }
 
   getAllTransactions(): Observable<Transaction[]> {

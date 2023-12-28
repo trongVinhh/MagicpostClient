@@ -1,37 +1,64 @@
 .trackingInfo-container {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  .trackingInfo-title {
-    color: black;
-  }
-  
-  .trackingInfo-details {
-    display: flex;
-  }
-  
-  .trackingInfo-column {
-    flex: 1;
-  }
-  
-  .trackingInfo-label {
-    display: block;
-    margin-bottom: 10px;
-    color: black;
-  }
-  
-  .trackingInfo-value {
-    color: black;
-    margin-bottom: 0;
-  }
+  background-color: azure;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  width: 150%;
+  margin-left: -25%;
+}
 
-  .orderNotFound{
-    background-color: white;
-  }
+.trackingInfo-title {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
 
-  .title_notfound {
-    color: black;
-  }
+.trackingInfo-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.trackingInfo-column {
+  flex-basis: 50%;
+}
+
+.col-left {
+  margin: 16px;
+}
+.col-right {
+  margin: 16px;
+}
+
+.trackingInfo-label {
+  font-weight: bold;
+}
+
+.trackingInfo-value {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.icon {
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+.justify-text {
+  text-align: justify;
+  justify-content: center;
+}
+
+.orderNotFound {
+  background-color: white;
+  border-radius: 10px;
+  justify-content: center;
+  text-align: center;
+}
+.title_notfound {
+  font-size: 26px;
+  margin-top: 20px;
+}
+.please-check {
+  background-color: white;
+}

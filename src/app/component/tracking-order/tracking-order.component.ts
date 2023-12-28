@@ -28,7 +28,7 @@ export class TrackingOrderComponent implements OnInit {
   }
 
 
-  async trackingOrderInfo(orderCode: string) {
+  trackingOrderInfo(orderCode: string) {
     this.trackingOrderService.getTrackingInfo(orderCode).subscribe(
       data => {
         this.trackingInfo = data;
@@ -39,6 +39,7 @@ export class TrackingOrderComponent implements OnInit {
       }
     );
   }
+  
   async submitForm() {
     if (this.trackingForm.valid) {
       const trackingCode = this.trackingForm.get('trackingCode')?.value;
@@ -49,6 +50,13 @@ export class TrackingOrderComponent implements OnInit {
       this.trackingCodeValid = false;
     }
 
+  }
+  formatDate(dateString: Date): string {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   }
 
 
