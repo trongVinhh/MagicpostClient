@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="create-employee.component.css">
+  <link rel="stylesheet" type="text/css" href="addemployee.component.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -158,30 +158,10 @@
     <hr>
     <ul class="app-menu">
       
-      <li>
-        <a class="app-menu__item active" href="#" routerLink="/director/home">
-            <i class="app-menu__icon bx bx-tachometer"></i>
-            <span class="app-menu__label">Bảng điều khiển</span>
-        </a>
-    </li>
-    <li>
-        <a class="app-menu__item" href="#" routerLink="/director/transaction-offices">
-            <i class="app-menu__icon bx bx-id-card"></i>
-            <span class="app-menu__label">Quản lý điểm giao dịch</span>
-        </a>
-    </li>
-    <li>
-        <a class="app-menu__item" href="#" routerLink="/director/storage-offices">
-            <i class="app-menu__icon bx bx-user-voice"></i>
-            <span class="app-menu__label">Quản lý điểm tập kết</span>
-        </a>
-    </li>
-    <li>
-      <a class="app-menu__item" href="#" routerLink="/director/storage-offices">
-          <i class="app-menu__icon bx bx-user-voice"></i>
-          <span class="app-menu__label">Quản lý điểm tập kết</span>
-      </a>
-  </li>
+          <li><a class="app-menu__item active" href="manager-transaction.component.html" routerLink="/manager-transaction/home"><i class='app-menu__icon bx bx-id-card'></i>
+            <span class="app-menu__label">Quản lý nhân viên</span></a></li>
+          <li><a class="app-menu__item " href="../statistical-transaction/statistical-transaction.component.html" routerLink="/manager-transaction/orders"><i class='app-menu__icon bx bx-id-card'></i>
+              <span class="app-menu__label">Thống kê hàng hóa</span></a></li>
       
     </ul>
   </aside>
