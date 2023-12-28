@@ -22,13 +22,18 @@ import { NavigationComponent } from './component/navigation/navigation.component
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './service/auth/auth-guard.service';
 import { AuthService } from './service/auth/auth.service';
+import { AboutUsComponent } from './component/about-us/about-us.component';
+import { ServiceComponent } from './component/service/service.component';
+import { ContactComponent } from './component/contact/contact.component';
 import { StatisticalStorageComponent } from './component/admin/manager-storage/statistical-storage/statistical-storage.component';
 import { StatisticalTransactionComponent } from './component/admin/manager-transaction/statistical-transaction/statistical-transaction.component';
 import { EmployeeManagementComponent } from './component/admin/director/employee-management/employee-management.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'tracking', pathMatch: 'full' },
+  
   { path: 'tracking', component: TrackingOrderComponent },
+  { path: 'home', component: TrackingOrderComponent },
   { path: 'tracking/:id', component: TrackingOrderComponent },
   
   { 
@@ -46,7 +51,9 @@ const routes: Routes = [
   },
   
   { path: 'employee-storage', component: EmployeeStorageComponent },
-
+  {path: 'aboutUs', component: AboutUsComponent},
+  {path: 'service', component: ServiceComponent},
+  { path: 'contact', component: ContactComponent},  
   { 
     path: 'manager-transaction/home', 
     component: ManagerTransactionComponent,
@@ -98,6 +105,7 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '**', redirectTo: 'tracking', pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -114,9 +122,9 @@ const routes: Routes = [
     NavigationComponent,
     StorageOfficeComponent,
     TransactionOfficeComponent,
-    StatisticalStorageComponent,
-    StatisticalTransactionComponent,
-    EmployeeStatisticalComponent,
+    AboutUsComponent,
+    ServiceComponent,
+    ContactComponent,
     EmployeeManagementComponent
   ],
   imports: [
@@ -126,6 +134,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     JwtModule,
+    
   ],
   providers: [TrackingOrderService, AuthGuardService, AuthService],
   bootstrap: [AppComponent]
