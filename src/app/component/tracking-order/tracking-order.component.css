@@ -4,6 +4,8 @@
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
+  width: 150%;
+  margin-left: -25%;
 }
 
 .trackingInfo-title {
@@ -49,13 +51,13 @@
 
 .orderNotFound {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   justify-content: center;
   text-align: center;
 }
 .title_notfound {
   font-size: 26px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .please-check {
   background-color: white;

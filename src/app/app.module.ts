@@ -29,9 +29,10 @@ import { StatisticalStorageComponent } from './component/admin/manager-storage/s
 import { StatisticalTransactionComponent } from './component/admin/manager-transaction/statistical-transaction/statistical-transaction.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'tracking', pathMatch: 'full' },
   
   { path: 'tracking', component: TrackingOrderComponent },
+  { path: 'home', component: TrackingOrderComponent },
   { path: 'tracking/:id', component: TrackingOrderComponent },
   
   { 
