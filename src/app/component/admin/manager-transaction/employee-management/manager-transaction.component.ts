@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TransactionId } from 'src/app/entity/transaction-id';
 import { TransactionOffices } from 'src/app/entity/transaction-offices';
 import { DirectorService } from 'src/app/service/director/director.service';
+import { EmployeeService } from 'src/app/service/employee/employee.service';
 import { ManagerService } from 'src/app/service/manager/manager.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class ManagerTransactionComponent implements OnInit {
   transaction_id!: TransactionId;
   selectedEmployee!: any;
   constructor(private directorService: DirectorService, 
-    private managerService: ManagerService, 
+    private managerService: ManagerService,
+    private employeeService: EmployeeService,
     private router: Router) { 
     this.username = this.managerService.getUserName();
   }
@@ -64,6 +66,27 @@ export class ManagerTransactionComponent implements OnInit {
       win.document.close();
       win.print();
     }
+  }
+
+  checkClick(employee: any) {
+    // window.confirm("Bạn có chắc chắn muốn xóa nhân viên này không?");
+    if (confirm("Bạn có chắc chắn muốn xóa nhân viên này không?")) {
+      // alert("Xóa nhân viên thành công thành công");
+      this.removeEmployee(employee)
+    } 
+}
+
+  removeEmployee(employee: any) {
+    console.log(employee);
+    const id = employee.id;
+    console.log(id);
+    this.employeeService.deleteEmployee(id).subscribe(
+      data => {
+        alert("Xóa nhân viên thành công thành công");
+        // this.router.navigate(['/manager-transaction/home']);
+        window.location.reload();
+      }
+    )
   }
 
   time() {

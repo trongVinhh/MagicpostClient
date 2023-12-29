@@ -53,6 +53,9 @@ export class EmployeeService {
     return this.httpClient.post<any>(`${this.baseUrlEmployee}/${employee.id}/role/${role}/update`, employee, { headers: this.headers });
   }
 
+  deleteEmployee(id: string) : Observable<any> {
+    return this.httpClient.delete<any>(`${this.baseUrlEmployee}/${id}`, { headers: this.headers });
+  }
   // chuyển hàng từ điểm giao dịch tới kho
   sendPackageFromTransToWarehouse(transactionOfficeId: string, storageId: string, orderCode: string): Observable<any> {
     const params = {transactionOfficeId, storageId, orderCode};

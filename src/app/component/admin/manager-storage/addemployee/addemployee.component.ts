@@ -58,7 +58,10 @@ export class AddEmployeeComponent implements OnInit{
         if (data != null) {
           alert("Thêm nhân viên thành công");
           this.router.navigate(['/manager-storage/home']);
-        }
+        } 
+      }, 
+      error => {
+        alert("Thêm nhân viên thất bại, vì" + error.error.message);
       }
     )
   }
