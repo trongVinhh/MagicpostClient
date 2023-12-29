@@ -53,6 +53,9 @@ export class EmployeeService {
     return this.httpClient.post<any>(`${this.baseUrlEmployee}/${employee.id}/role/${role}/update`, employee, { headers: this.headers });
   }
 
+  deleteEmployee(id: string) : Observable<any> {
+    return this.httpClient.delete<any>(`${this.baseUrlEmployee}/${id}`, { headers: this.headers });
+  }
 
   // getStorageIdByUsername(username: string | null): Observable<StorageId> {
   //   return this.httpClient.get<StorageId>(`${this.baseUrl}/getStorageIdByUsername?username=${username}`, {headers: this.headers});

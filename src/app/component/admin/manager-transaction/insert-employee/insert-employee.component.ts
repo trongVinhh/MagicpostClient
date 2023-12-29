@@ -10,6 +10,7 @@ import { ManagerService } from 'src/app/service/manager/manager.service';
   styleUrl: './insert-employee.component.css'
 })
 export class InsertEmployeeComponent implements OnInit {
+
   employeeForm!: FormGroup;
   username: string | null = '';
   constructor(private formBuilder: FormBuilder,
@@ -31,7 +32,36 @@ export class InsertEmployeeComponent implements OnInit {
       });
     }
   onSubmit() {
-    throw new Error('Method not implemented.');
+    const firstName = this.employeeForm.get('firstName')?.value;
+    const lastName = this.employeeForm.get('lastName')?.value;
+    const username = this.employeeForm.get('username')?.value;
+    const password = this.employeeForm.get('password')?.value;
+    const email = this.employeeForm.get('email')?.value;
+    const phone = this.employeeForm.get('phone')?.value;
+    const address = this.employeeForm.get('address')?.value;
+    const role = this.employeeForm.get('role')?.value;
+    console.log(firstName, lastName, username, password, email, phone, address, role);
+    const employee = {
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      password: password,
+      email: email,
+      phone: phone,
+      address: address,
+    }
+    console.log(employee);
+    this.employeeService.createEmployee(employee, role).subscribe(
+      data => {
+        if (data != null) {
+          alert("Thêm nhân viên thành công");
+          this.router.navigate(['/manager-transaction/home']);
+        } 
+      }, 
+      error => {
+        alert("Thêm nhân viên thất bại, vì" + error.error.message);
+      }
+    )
   }
   
   
