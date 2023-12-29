@@ -70,7 +70,7 @@ checkClick(employee: any) {
   displayForm(emplpoyee: any) {
     this.selectedEmployee = emplpoyee;
     sessionStorage.setItem('selectedEmployee', JSON.stringify(this.selectedEmployee));
-    this.router.navigate(['/manager-storage/update-employee']);
+    this.router.navigate(['/director/update-staff']);
   }
   getStorageIdByUsername() {
     this.managerService.getStorageIdByUsername(this.managerService.getUserName()).subscribe(
