@@ -15,8 +15,14 @@
             <td colspan="2">
                 <h2>Magic Post</h2>
             </td>
-            <td colspan="2">
-                <h2>Mã QR</h2>
+            <td colspan="2" style="display: flex;">
+                <div>
+                    
+                </div>
+                <div>
+                    <img [src]="qrCodeUrl" alt="QR Code" width="150px" height="150px">
+                </div>
+                <!-- <qrcode [qrdata]="order" [width]="256" [errorCorrectionLevel]="'M'"></qrcode> -->
             </td>
         <tr>
             <td colspan="2">
