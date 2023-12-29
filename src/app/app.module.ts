@@ -42,6 +42,7 @@ import { StorageSentOrderComponent } from './component/admin/employee-storage/st
 import { CurrentOrderComponent } from './component/admin/employee-transaction/current-order/current-order.component';
 import { ManagerStorageComponent } from './component/admin/manager-storage/employee-management/manager-storage.component';
 import { UpdateStaffComponent } from './component/admin/director/update-staff/update-staff.component';
+import { BillComponent } from './component/admin/employee-transaction/bill/bill.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tracking', pathMatch: 'full' },
@@ -87,7 +88,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
   },
-
+  { path: 'employee-transaction/bill', component: BillComponent},
   { 
     path: 'employee-transaction/shippingOrder',
     component: ShippingOrderComponent,
@@ -219,7 +220,8 @@ const routes: Routes = [
     ManagerStorageComponent,
     DirectorComponent,
     AddEmployeeComponent,
-    UpdateStaffComponent
+    UpdateStaffComponent,
+    BillComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
