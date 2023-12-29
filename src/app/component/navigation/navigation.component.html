@@ -1,22 +1,20 @@
 <ul class="app-menu">
-    <li><a class="app-menu__item" href="employee-transaction.component.html" routerLink="/employee-transaction/createOrder" [ngClass]="{ 'active': currentRoute === 'employee-transaction/createOrder'}"><i
+    <li><a class="app-menu__item" href="employee-transaction.component.html" routerLink="/employee-transaction/createOrder" routerLinkActive="active"><i
           class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Tạo đơn hàng mới</span></a></li>
-    <li><a class="app-menu__item " href="employee-transaction-createorder.component.html" routerLink="/employee-transaction/deliveryForm" [ngClass]="{ 'active': currentRoute === 'employee-transaction/deliveryForm'}"><i
+    <li><a class="app-menu__item " href="employee-transaction-createorder.component.html" routerLink="/employee-transaction/deliveryForm" routerLinkActive="active"><i
           class='app-menu__icon bx bx-run'></i><span class="app-menu__label"> Tạo đơn chuyển đi</span></a></li>
 
-    <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/currentOrder"><i
-    class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng hiện tại</span></a></li>
+    <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/currentOrder" routerLinkActive="active"><i
+    class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng đã xác nhận</span></a></li>
 
-    <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/receiveOrder"><i
-          class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng đang đến điểm
-          giao dịch</span></a></li>
-    <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/sendOrder"><i
-          class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng gửi đi điểm
-          khác</span></a></li>
-  <li><a class="app-menu__item" href="employee-transaction-createorder.component.html" routerLink="/employee-transaction/shippingOrder"><i
+    <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/receiveOrder" routerLinkActive="active"><i
+          class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng chờ xác nhận</span></a></li>
+    <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/sendOrder" routerLinkActive="active"><i
+          class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng gửi đi</span></a></li>
+  <li><a class="app-menu__item" href="employee-transaction-createorder.component.html" routerLink="/employee-transaction/shippingOrder" routerLinkActive="active"><i
           class='app-menu__icon bx bx-run'></i><span class="app-menu__label">Thống kê đơn hàng đang giao</span></a>
     </li>
-    <li><a class="app-menu__item " href="employee-transaction-createorder.component.html" routerLink="/employee-transaction/sendOrder"><i
+    <li><a class="app-menu__item " href="employee-transaction-createorder.component.html" routerLink="/employee-transaction/sendOrder" routerLinkActive="active"><i
           class='app-menu__icon bx bx-run'></i><span class="app-menu__label">Thống kê đơn hàng đã giao (chưa xử lý)</span></a>
     </li>
   </ul>

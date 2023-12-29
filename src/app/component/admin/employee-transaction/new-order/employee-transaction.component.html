@@ -31,7 +31,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="employee-transaction.component.html"><i
+      <li><a class="app-nav__item" href="employee-transaction.component.html" routerLink="/login"><i
             class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
@@ -95,7 +95,7 @@
                   <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="senderProvinceCode"
                     (ngModelChange)="getSenderDistrictList()" formControlName="senderProvince">
                     <option [value]="0">-- Chọn tỉnh/thành phố --</option>
-                    <option *ngFor="let province of filteredProvinceList" [value]="province.name">{{province.name}}
+                    <option *ngFor="let province of filteredSenderProvinceList" [value]="province.name">{{province.name}}
                     </option>
                   </select>
                 </div>
@@ -104,7 +104,7 @@
                   <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="senderDistrictCode"
                     (ngModelChange)="getSenderWardList()" formControlName="senderDistrict">
                     <option [value]="0">-- Chọn quận/huyện --</option>
-                    <option *ngFor="let district of filteredDistrictList" [value]="district.name">{{district.name}}
+                    <option *ngFor="let district of filteredSenderDistrictList" [value]="district.name">{{district.name}}
                     </option>
                   </select>
                 </div>
@@ -112,7 +112,7 @@
                   <label for="exampleSelect1" class="control-label">Phường/Xã</label>
                   <select class="form-control" id="exampleSelect1" name="ward" formControlName="senderWard">
                     <option>-- Chọn phường/xã --</option>
-                    <option *ngFor="let ward of filteredWardList">{{ward.name}}</option>
+                    <option *ngFor="let ward of filteredSenderWardList">{{ward.name}}</option>
                   </select>
                 </div>
               </div>
@@ -142,7 +142,7 @@
                   <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="receiverProvinceCode"
                     (ngModelChange)="getReceiverDistrictList()" formControlName="receiverProvince">
                     <option [value]="0">-- Chọn tỉnh/thành phố --</option>
-                    <option *ngFor="let province of filteredProvinceList" [value]="province.name">{{province.name}}
+                    <option *ngFor="let province of filteredReceiverProvinceList" [value]="province.name">{{province.name}}
                     </option>
                   </select>
                 </div>
@@ -151,7 +151,7 @@
                   <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="receiverDistrictCode"
                     (ngModelChange)="getReceiverWardList()" formControlName="receiverDistrict">
                     <option [value]="0">-- Chọn quận/huyện --</option>
-                    <option *ngFor="let district of filteredDistrictList" [value]="district.name">{{district.name}}
+                    <option *ngFor="let district of filteredReceiverDistrictList" [value]="district.name">{{district.name}}
                     </option>
                   </select>
                 </div>
@@ -159,7 +159,7 @@
                   <label for="exampleSelect1" class="control-label">Phường/Xã</label>
                   <select class="form-control" id="exampleSelect1" name="ward" formControlName="receiverWard"> 
                     <option>-- Chọn phường/xã --</option>
-                    <option *ngFor="let ward of filteredWardList">{{ward.name}}</option>
+                    <option *ngFor="let ward of filteredReceiverWardList">{{ward.name}}</option>
                   </select>
                 </div>
               </div>

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="../main/director.component.css">
+  <link rel="stylesheet" type="text/css" href="./detail-storage.component.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -21,21 +21,21 @@
 
 </head>
 
-<body class="app sidebar-mini rtl">
+<body onload="time()" class="app sidebar-mini rtl">
   <!-- Navbar-->
   <header class="app-header">
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-    aria-label="Hide Sidebar"></a>
+      aria-label="Hide Sidebar"></a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="../main/director.component.html" routerLink="/login"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-    
+      <li><a class="app-nav__item" href="../main/director.component.html" routerLink="/login"><i class='bx bx-log-out bx-rotate-180'></i>
+        </a>
+
       </li>
     </ul>
-
   </header>
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
@@ -75,99 +75,64 @@
         </a>
     </li>
   </ul>
-
   </aside>
-
   <main class="app-content">
-    <div class="app-title">
+    <div class="app-title col-md-12">
       <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Điểm giao dịch</b></a></li>
+        <li class="breadcrumb-item active"><a href="#"><b>Điểm tập kết</b></a></li>
       </ul>
       <div id="clock">{{tmp}}</div>
     </div>
 
-    <main class="row">
+    <div class="row">
       <div class="col-md-12">
-          <div class="tile">
-            <div class="tile-body">
-                  <div >
-                      <h3 class="tile-title">Danh sách các điểm giao dịch</h3>
-                  </div>
-                  <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
-                  id="sampleTable">
-                      <thead>
-                        <tr>
-                          <th>ID </th>
-                          <th>Tên điểm giao dịch</th>
-                          <th>Hotline</th>
-                          <th>Email</th>
-                          <th>Địa chỉ</th>
-                          <th>Danh sách nhân viên</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        
-
-                        <!-- List transaction offices -->
-                        <tr *ngFor="let item of transaction_offices">
-                          <td>{{item.id}}</td>
-                          <td>{{item.name}}</td>
-                          <td>{{item.hotline}}</td>
-                          <td>{{item.email}}</td>
-                          <td>{{item.address}}</td>
-                          <td>
-                            <ul>
-                              <li *ngFor="let employee of item.employees">
-                                {{employee.firstName}} {{employee.lastName}}
-                              </li>
-                            </ul>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  <!-- / div trống-->
-                </div>
+        <div class="tile">
+          <div class="tile-body">
+            <div>
+              <h3 class="tile-title">Danh sách các điểm tập kết</h3>
+            </div>
+            <div class="horizontal-scroll-container"> 
+              <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
+              <thead>
+                <tr>
+                  <th>ID </th>
+                  <th>Tên điểm giao dịch</th>
+                  <th>Vị trí</th>
+                  <th>Danh sách nhân viên</th>
+                  <th>Tính năng</th>
+                  <th>Số đơn hàng</th>
+                  <th>Số đơn hàng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of storage_offices">
+                  <td>{{item.id}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.address}}</td>
+                  <td>
+                    <ul *ngFor="let employee of item.employees">
+                      <li>
+                        {{employee.firstName}} {{employee.lastName}}
+                      </li>
+                    </ul>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
           </div>
+        </div> 
 
-          <div class="tile">
-              <div class="tile-body">
-                    <div >
-                        <h3 class="tile-title">Danh sách đơn hàng tại điểm giao dịch</h3>
-                    </div>
-                    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
-                    id="sampleTable">
-                      <thead>
-                        <tr>
-                          <th>ID đơn hàng</th>
-                          <th>Khách hàng</th>
-                          <th>Đơn hàng</th>
-                          <th>Khối lượng</th>
-                          <th>Tổng tiền</th>
-                          <!-- <th>Tình trạng</th> -->
-                          <th>Điểm giao dịch</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        
+      </div>
+    </div>
+     
+  </main>
 
-                        <!-- List all orders -->
-                        <tr *ngFor="let item of allTransactions">
-                          <td>{{item.id}}</td>
-                          <td>{{item.customerDto.firstName}} {{item.customerDto.lastName}}</td>
-                          <td>{{item.orderCode}}</td>
-                          <td>{{item.mass}}</td>
-                          <td>{{item.totalPrice}}</td>
-                          <td>{{item.transactionOfficeId}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-              </div>
-          </div>
-        
-        </div>
-    </main>  
-  </main>        
-               
+
+
   <!-- Essential javascripts for application to work-->
   <script src="js/jquery-3.2.1.min.js"></script>
   <script src="js/popper.min.js"></script>
@@ -183,6 +148,11 @@
   <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript">$('#sampleTable').DataTable();</script>
+
+
+
+
+
   <script>
     function deleteRow(r) {
       var i = r.parentNode.parentNode.rowIndex;
@@ -192,14 +162,14 @@
       jQuery(".trash").click(function () {
         swal({
           title: "Cảnh báo",
-         
+
           text: "Bạn có chắc chắn là muốn xóa nhân viên này?",
           buttons: ["Hủy bỏ", "Đồng ý"],
         })
           .then((willDelete) => {
             if (willDelete) {
               swal("Đã xóa thành công.!", {
-                
+
               });
             }
           });
@@ -211,7 +181,7 @@
       e.stopImmediatePropagation();
     });
 
-    
+
 
 
     //Thời Gian
@@ -254,7 +224,7 @@
         return i;
       }
     }
-    
+
     var myApp = new function () {
       this.printTable = function () {
         var tab = document.getElementById('sampleTable');
@@ -264,7 +234,7 @@
         win.print();
       }
     }
-    
+
 
 
     //Modal

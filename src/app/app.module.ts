@@ -41,6 +41,7 @@ import { DeliveryFormComponent } from './component/admin/employee-transaction/de
 import { StorageSentOrderComponent } from './component/admin/employee-storage/storage-sent-order/storage-sent-order.component';
 import { CurrentOrderComponent } from './component/admin/employee-transaction/current-order/current-order.component';
 import { ManagerStorageComponent } from './component/admin/manager-storage/employee-management/manager-storage.component';
+import { DetailStorageComponent } from './component/admin/director/detail-storage/detail-storage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tracking', pathMatch: 'full' },
@@ -178,6 +179,13 @@ const routes: Routes = [
     data: { expectedRole: ['ROLE_ADMIN'] }
   },
 
+  { 
+    path: 'director/employee-management', 
+    component: EmployeeManagementComponent, 
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_ADMIN'] }
+  },
+
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: 'tracking', pathMatch: 'full' },
@@ -216,7 +224,8 @@ const routes: Routes = [
     StorageSentOrderComponent,
     ManagerStorageComponent,
     DirectorComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    DetailStorageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

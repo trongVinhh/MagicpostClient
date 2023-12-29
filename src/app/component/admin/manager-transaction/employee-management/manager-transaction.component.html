@@ -31,7 +31,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="/index.html" routerLink="/login"><i class='bx bx-log-out bx-rotate-180' ></i> </a>
 
       </li>
     </ul>
@@ -105,7 +105,7 @@
                   <td>{{employee.email}}</td>
                   <td>{{employee.role[0].name}}</td>
                   <td>
-                    <button class="btn btn-primary btn-sm trash" style="margin: 2px;" type="button" title="Xóa" (click)="checkClick(employee)"><i
+                    <button class="btn btn-primary btn-sm trash mr-2" type="button" title="Xóa" (click)="checkClick(employee)"><i
                       class="fas fa-trash-alt"></i> </button>
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" (click)="displayForm(employee)"
                       data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>

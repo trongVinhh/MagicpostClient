@@ -61,25 +61,9 @@
     <div class="row">
       <div class="col-md-12">
         <div class="tile">
-          <h3 class="tile-title">Tạo đơn hàng đến điểm giao dịch/điểm tập kết khác</h3>
+          <h3 class="tile-title">Tạo đơn hàng đến điểm tập kết khác</h3>
           <div class="tile-body">
             <form class="row" [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
-              <div class="form-group  col-md-4">
-                <label class="control-label">ID đơn hàng ( Nếu không nhập sẽ tự động phát sinh )</label>
-                <input class="form-control" type="text">
-              </div>
-              <div class="form-group  col-md-4">
-                <label class="control-label">Tên khách hàng</label>
-                <input class="form-control" type="text">
-              </div>
-              <div class="form-group  col-md-4">
-                <label class="control-label">Số điện thoại khách hàng</label>
-                <input class="form-control" type="number">
-              </div>
-              <div class="form-group  col-md-4" formControlName="address">
-                <label class="control-label">Địa chỉ khách hàng</label>
-                <input class="form-control" type="text">
-              </div>
               <div class="form-group col-md-4">
                 <label for="exampleSelect1" class="control-label">Điểm đến</label>
                 <select class="form-control" id="exampleSelect1" [(ngModel)]="storageId" formControlName="storageId">
@@ -87,12 +71,11 @@
                   <option *ngFor="let storage of storageList" [value]='storage.id'>{{storage.name}}</option>
                 </select>
               </div>
-              <div class="form-group  col-md-4">
-                <label class="control-label">Ghi chú đơn hàng</label>
-                <textarea class="form-control" rows="4"></textarea>
+              <div class="form-group col-md-4" style="padding-top: 32px;">
+                <button class="btn btn-save mr-2" type="submit">Lưu lại</button>
+                <a class="btn btn-cancel" href="">Hủy bỏ</a>
               </div>
-              <button class="btn btn-save" type="submit">Lưu lại</button>
-              <a class="btn btn-cancel" href="">Hủy bỏ</a>
+              
             </form>
 
           </div>

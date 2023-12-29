@@ -1,3 +1,4 @@
+import { filter } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -90,16 +91,22 @@ export class EmployeeTransactionComponent implements OnInit {
   regionList = ["Miền Bắc", "Miền Trung", "Miền Nam"];
   senderRegionCode: number = 0;
   receiverRegionCode: number = 0;
+
   provinceList: Province[] = [];
-  filteredProvinceList: Province[] = [];
+  filteredSenderProvinceList: Province[] = [];
+  filteredReceiverProvinceList: Province[] = [];
   senderProvinceCode: number = 0;
   receiverProvinceCode: number = 0;
+
   districtList: District[] = [];
-  filteredDistrictList: District[] = [];
+  filteredSenderDistrictList: District[] = [];
+  filteredReceiverDistrictList: District[] = [];
   senderDistrictCode: number = 0;
   receiverDistrictCode: number = 0;
+
   wardList: Ward[] = [];
-  filteredWardList: Ward[] = [];
+  filteredSenderWardList: Ward[] = [];
+  filteredReceiverWardList: Ward[] = [];
   senderWardCode: number = 0;
   receiverWardCode: number = 0;
   separateRegion = [[1, 37], [38, 68], [70, 96]];
@@ -116,10 +123,10 @@ export class EmployeeTransactionComponent implements OnInit {
       this.limitProvince = this.separateRegion[2];
     }
 
-    this.filteredProvinceList = this.provinceList.filter((province: Province) => {
+    this.filteredSenderProvinceList = this.provinceList.filter((province: Province) => {
       return province.code >= this.limitProvince[0] && province.code <= this.limitProvince[1];
     });
-    console.log(this.filteredProvinceList);
+    console.log(this.filteredSenderProvinceList);
   }
 
   getReceiverProvinceList() {
@@ -131,15 +138,15 @@ export class EmployeeTransactionComponent implements OnInit {
       this.limitProvince = this.separateRegion[2];
     }
 
-    this.filteredProvinceList = this.provinceList.filter((province: Province) => {
+    this.filteredReceiverProvinceList = this.provinceList.filter((province: Province) => {
       return province.code >= this.limitProvince[0] && province.code <= this.limitProvince[1];
     });
-    console.log(this.filteredProvinceList);
+    console.log(this.filteredReceiverProvinceList);
   }
   
   
-  getProvinceCode(provinceName: string): number {
-    for (let province of this.filteredProvinceList) {
+  getSenderProvinceCode(provinceName: string): number {
+    for (let province of this.filteredSenderProvinceList) {
       if (province.name == provinceName) {
         return province.code;
       }
@@ -147,24 +154,42 @@ export class EmployeeTransactionComponent implements OnInit {
     return 0;
   }
   
+  getReceiverProvinceCode(provinceName: string): number {
+    for (let province of this.filteredReceiverProvinceList) {
+      if (province.name == provinceName) {
+        return province.code;
+      }
+    }
+    return 0;
+  }
+
   getSenderDistrictList() {
-    this.filteredDistrictList = this.districtList.filter((district: District) => {
-      return district.province_code == this.getProvinceCode(this.orderForm.get('senderProvince')?.value);
+    this.filteredSenderDistrictList = this.districtList.filter((district: District) => {
+      return district.province_code == this.getSenderProvinceCode(this.orderForm.get('senderProvince')?.value);
     });
 
-    console.log(this.filteredDistrictList);
+    console.log(this.filteredSenderDistrictList);
   }
 
   getReceiverDistrictList() {
-    this.filteredDistrictList = this.districtList.filter((district: District) => {
-      return district.province_code == this.getProvinceCode(this.orderForm.get('receiverProvince')?.value);
+    this.filteredReceiverDistrictList = this.districtList.filter((district: District) => {
+      return district.province_code == this.getReceiverProvinceCode(this.orderForm.get('receiverProvince')?.value);
     });
 
-    console.log(this.filteredDistrictList);
+    console.log(this.filteredReceiverDistrictList);
   }
   
-  getDistrictCode(districtName: string): number {
-    for (let district of this.filteredDistrictList) {
+  getSenderDistrictCode(districtName: string): number {
+    for (let district of this.filteredSenderDistrictList) {
+      if (district.name == districtName) {
+        return district.code;
+      }
+    }
+    return 0;
+  }
+
+  getReceiverDistrictCode(districtName: string): number {
+    for (let district of this.filteredReceiverDistrictList) {
       if (district.name == districtName) {
         return district.code;
       }
@@ -173,19 +198,19 @@ export class EmployeeTransactionComponent implements OnInit {
   }
 
   getSenderWardList() {
-    this.filteredWardList = this.wardList.filter((ward: Ward) => {
-      return ward.district_code == this.getDistrictCode(this.orderForm.get('senderDistrict')?.value);
+    this.filteredSenderWardList = this.wardList.filter((ward: Ward) => {
+      return ward.district_code == this.getSenderDistrictCode(this.orderForm.get('senderDistrict')?.value);
     });
 
-    console.log(this.filteredWardList);
+    console.log(this.filteredSenderWardList);
   }
 
   getReceiverWardList() {
-    this.filteredWardList = this.wardList.filter((ward: Ward) => {
-      return ward.district_code == this.getDistrictCode(this.orderForm.get('receiverDistrict')?.value);
+    this.filteredReceiverWardList = this.wardList.filter((ward: Ward) => {
+      return ward.district_code == this.getReceiverDistrictCode(this.orderForm.get('receiverDistrict')?.value);
     });
 
-    console.log(this.filteredWardList);
+    console.log(this.filteredReceiverWardList);
   }
 
 

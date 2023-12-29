@@ -71,8 +71,8 @@
               <thead>
                 <tr>
                   <th width="15"><input type="checkbox" id="all"></th>
-                  <th width="20">ID đơn hàng</th>
-                  <th width="50">Khách hàng</th>
+                  <th>ID đơn hàng</th>
+                  <th>Khách hàng</th>
                   <th>Khối lượng</th>
                   <th>Tổng tiền</th>
                   <th>Tình trạng</th>
@@ -87,7 +87,7 @@
                   <td>2</td>
                   <td>9.400.000 đ</td>
                   <td><span class="badge bg-success">Nhận</span></td>
-                  <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i
+                  <td><button class="btn btn-primary btn-sm trash mr-2" type="button" title="Xóa"><i
                         class="fas fa-trash-alt"></i> </button>
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" [routerLink]="['/employee-transaction/deliveryForm']"><i
                         class="fa fa-edit"></i></button>
@@ -100,7 +100,7 @@
                   <td>{{transaction.mass}}</td>
                   <td>{{transaction.totalPrice}}</td>
                   <td><span class="badge bg-danger">Gửi</span></td>
-                  <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i
+                  <td><button class="btn btn-primary btn-sm trash mr-2" type="button" title="Xóa"><i
                         class="fas fa-trash-alt" (click)="createPackageDelivery(transaction.orderCode)"></i></button>
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i
                         class="fa fa-edit" [routerLink]="['/employee-transaction/deliveryForm']" [queryParams]="{id: transaction.transactionOfficeId, orderCode: transaction.orderCode}"></i></button>

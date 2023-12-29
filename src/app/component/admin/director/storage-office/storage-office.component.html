@@ -44,32 +44,32 @@
         alt="User Image">
       <div>
         <p class="app-sidebar__user-name"><b>{{username}}</b></p>
-        <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+        <p class="app-sidebar__user-designation">Giám đốc</p>
       </div>
     </div>
     <hr>
 
     <ul class="app-menu">
       <li>
-          <a class="app-menu__item active" href="#" routerLink="/director/home">
+          <a class="app-menu__item" href="#" routerLink="/director/home" routerLinkActive="active">
               <i class="app-menu__icon bx bx-tachometer"></i>
               <span class="app-menu__label">Bảng điều khiển</span>
           </a>
       </li>
       <li>
-          <a class="app-menu__item" href="#" routerLink="/director/transaction-offices">
+          <a class="app-menu__item" href="#" routerLink="/director/transaction-offices" routerLinkActive="active">
               <i class="app-menu__icon bx bx-id-card"></i>
               <span class="app-menu__label">Quản lý điểm giao dịch</span>
           </a>
       </li>
       <li>
-          <a class="app-menu__item" href="#" routerLink="/director/storage-offices">
+          <a class="app-menu__item" href="#" routerLink="/director/storage-offices" routerLinkActive="active">
               <i class="app-menu__icon bx bx-user-voice"></i>
               <span class="app-menu__label">Quản lý điểm tập kết</span>
           </a>
       </li>
       <li>
-        <a class="app-menu__item" href="#" routerLink="/director/storage-offices">
+        <a class="app-menu__item" href="#" routerLink="/director/employee-management" routerLinkActive="active">
             <i class="app-menu__icon bx bx-user-voice"></i>
             <span class="app-menu__label">Quản lý nhân viên</span>
         </a>
@@ -77,100 +77,99 @@
   </ul>
   </aside>
   <main class="app-content">
-    <div class="app-title">
+    <div class="app-title col-md-12">
       <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item active"><a href="#"><b>Điểm tập kết</b></a></li>
       </ul>
       <div id="clock">{{tmp}}</div>
     </div>
 
-    <div class="row">  
-    </div>
-
-    <div class="tile">
-      <div class="tile-body">
-        <div>
-          <h3 class="tile-title">Danh sách các điểm tập kết</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="horizontal-scroll-container"> 
-      <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
-      <thead>
-        <tr>
-          <th>ID </th>
-          <th>Tên điểm giao dịch</th>
-          <th>Vị trí</th>
-          <th>Danh sách nhân viên</th>
-          <th>Tính năng</th>
-          <th>Số đơn hàng</th>
-          <th>Số đơn hàng</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of storage_offices">
-          <td>{{item.id}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.address}}</td>
-          <td>
-            <ul *ngFor="let employee of item.employees">
-              <li>
-                {{employee.firstName}} {{employee.lastName}}
-              </li>
-            </ul>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <!-- <td><button class="btn btn-primary btn-sm trash" title="Xóa" onclick="myFunction()"><i
-                class="fas fa-trash-alt"></i>
-            </button>
-            <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp" data-toggle="modal"
-              data-target="#ModalUP"><i class="fas fa-edit"></i>
-            </button>
-          </td> -->
-        </tr>
-      </tbody>
-    </table>
-    </div>  
-
-    <div class="col-md-12">
-      <div class="tile">
-        <div class="tile-body">
-          <div>
-            <h3 class="tile-title">Danh sách tất cả đơn hàng</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <div class="tile-body">
+            <div>
+              <h3 class="tile-title">Danh sách các điểm tập kết</h3>
+            </div>
+            <div class="horizontal-scroll-container"> 
+              <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0" id="sampleTable">
+              <thead>
+                <tr>
+                  <th>ID </th>
+                  <th>Tên điểm giao dịch</th>
+                  <th>Vị trí</th>
+                  <th>Danh sách nhân viên</th>
+                  <th>Tính năng</th>
+                  <th>Số đơn hàng</th>
+                  <th>Số đơn hàng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of storage_offices">
+                  <td>{{item.id}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.address}}</td>
+                  <td>
+                    <ul *ngFor="let employee of item.employees">
+                      <li>
+                        {{employee.firstName}} {{employee.lastName}}
+                      </li>
+                    </ul>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <!-- <td><button class="btn btn-primary btn-sm trash" title="Xóa" onclick="myFunction()"><i
+                        class="fas fa-trash-alt"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp" data-toggle="modal"
+                      data-target="#ModalUP"><i class="fas fa-edit"></i>
+                    </button>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+            </div>
           </div>
-          <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
-            id="sampleTable">
-            <thead>
-              <tr>
-                <th>ID đơn hàng</th>
-                <th>Khách hàng</th>
-                <th>Vị trí</th>
-                <th>Khối lượng</th>
-                <th>Tổng tiền</th>
-                <th>Tình trạng</th>
-                <th>Số đơn hàng</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-              <tr *ngFor="let item of allOrders">
-                <td>{{item.id}}</td>
-                <td>
-                  {{item.transaction.customerDto.firstName}} {{item.transaction.customerDto.lastName}}
-                </td>
-                <td>{{item.currentStorageAddress}}</td>
-                <td>{{item.transaction.mass}}</td>
-                <td>{{item.transaction.totalPrice | currency: 'VNĐ'}}</td>
-                <td><span class="badge bg-danger">{{item.status}}</span></td>
-              </tr>
-            </tbody>
-          </table>
+        </div> 
+  
+        <div class="tile">
+          <div class="tile-body">
+            <div>
+              <h3 class="tile-title">Danh sách tất cả đơn hàng</h3>
+            </div>
+            <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+              id="sampleTable">
+              <thead>
+                <tr>
+                  <th>ID đơn hàng</th>
+                  <th>Khách hàng</th>
+                  <th>Vị trí</th>
+                  <th>Khối lượng</th>
+                  <th>Tổng tiền</th>
+                  <th>Tình trạng</th>
+                  <th>Số đơn hàng</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <tr *ngFor="let item of allOrders">
+                  <td>{{item.id}}</td>
+                  <td>
+                    {{item.transaction.customerDto.firstName}} {{item.transaction.customerDto.lastName}}
+                  </td>
+                  <td>{{item.currentStorageAddress}}</td>
+                  <td>{{item.transaction.mass}}</td>
+                  <td>{{item.transaction.totalPrice | currency: 'VNĐ'}}</td>
+                  <td><span class="badge bg-danger">{{item.status}}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+     
   </main>
 
 

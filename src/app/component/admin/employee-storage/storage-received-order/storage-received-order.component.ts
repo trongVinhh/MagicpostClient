@@ -47,10 +47,10 @@ export class StorageReceivedOrderComponent implements OnInit {
     }
 
     confirmOrder(orderCode: string, storageId: string): void {
+      this.isConfirmed = !this.isConfirmed;
       this.employeeService.confirmPackageReceived(orderCode, storageId).subscribe(
         data => {
           console.log(data);
-          this.isConfirmed = true;
           alert("Đã xác nhận đơn hàng");
         }
       )

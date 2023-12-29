@@ -32,7 +32,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="employee-transaction.component.html"><i
+      <li><a class="app-nav__item" href="employee-transaction.component.html" routerLink="/login"><i
             class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
@@ -41,35 +41,35 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../employee-transaction/image/me.jpg"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://png.pngtree.com/png-clipart/20190614/original/pngtree-web-page-ui-default-avatar-handsome-guy-png-image_3801746.jpg"
         width="50px" alt="User Image">
       <div>
         <p class="app-sidebar__user-name"><b>Đức Anh</b></p>
-        <p class="app-sidebar__user-designation">Nhân viên giao dịch</p>
+        <p class="app-sidebar__user-designation">Giám đốc</p>
       </div>
     </div>
     <hr>
     <ul class="app-menu">
       <li>
-          <a class="app-menu__item active" href="#" routerLink="/director/home">
+          <a class="app-menu__item" href="#" routerLink="/director/home" routerLinkActive="active">
               <i class="app-menu__icon bx bx-tachometer"></i>
               <span class="app-menu__label">Bảng điều khiển</span>
           </a>
       </li>
       <li>
-          <a class="app-menu__item" href="#" routerLink="/director/transaction-offices">
+          <a class="app-menu__item" href="#" routerLink="/director/transaction-offices" routerLinkActive="active">
               <i class="app-menu__icon bx bx-id-card"></i>
               <span class="app-menu__label">Quản lý điểm giao dịch</span>
           </a>
       </li>
       <li>
-          <a class="app-menu__item" href="#" routerLink="/director/storage-offices">
+          <a class="app-menu__item" href="#" routerLink="/director/storage-offices" routerLinkActive="active">
               <i class="app-menu__icon bx bx-user-voice"></i>
               <span class="app-menu__label">Quản lý điểm tập kết</span>
           </a>
       </li>
       <li>
-        <a class="app-menu__item" href="#" routerLink="/director/storage-offices">
+        <a class="app-menu__item" href="#" routerLink="/director/employee-management" routerLinkActive="active">
             <i class="app-menu__icon bx bx-user-voice"></i>
             <span class="app-menu__label">Quản lý nhân viên</span>
         </a>

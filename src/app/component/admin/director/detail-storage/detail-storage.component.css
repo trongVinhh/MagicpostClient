@@ -5092,8 +5092,8 @@ input[type="button"].btn-block {
 
 .badge {
   display: inline-block;
-  padding: 10px;
-  font-size: 15px;
+  padding: 7px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 1;
   text-align: center;
@@ -5101,7 +5101,6 @@ input[type="button"].btn-block {
   vertical-align: baseline;
   border-radius: 0.25rem;
   color: white;
-  border: none;
 }
 
 .badge:empty {
@@ -13969,13 +13968,12 @@ be a descendant of the grid when it is being dragged.
 }
 
 .app-menu__label {
-  white-space: wrap;
+  white-space: nowrap;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   font-size: 15px;
   font-weight: 500;
-  text-align: center;
 }
 
 .treeview.is-expanded [data-toggle='treeview'] {
@@ -15662,4 +15660,14 @@ text-align:center;
   padding: 5px 16px;
   background-color: white;
   color: white;
+}
+
+.horizontal-scroll-container {
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap; /* Prevent content from wrapping to the next line */
+}
+
+.table {
+  width: 800px;
 }
