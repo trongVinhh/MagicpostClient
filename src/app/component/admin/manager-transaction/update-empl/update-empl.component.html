@@ -149,7 +149,7 @@
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
         <div class="app-sidebar__user"><img class="app-sidebar__user-avatar"
-                src="https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2019/12/9-Best-Online-Avatars-and-How-to-Make-Your-Own-for-Free-image1-5.png"
+                src="http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png"
                 width="50px" alt="User Image">
             <div>
                 <p class="app-sidebar__user-name"><b>{{username}}</b></p>
@@ -160,10 +160,10 @@
         <ul class="app-menu">
 
             <li><a class="app-menu__item active" href="manager-storage.component.html"
-                    routerLink="/manager-storage/home"><i class='app-menu__icon bx bx-id-card'></i>
+                    routerLink="/manager-transaction/home"><i class='app-menu__icon bx bx-id-card'></i>
                     <span class="app-menu__label">Quản lý nhân viên</span></a></li>
             <li><a class="app-menu__item " href="../statistical-storage/statistical-storage.component.html"
-                    routerLink="/manager-storage/orders"><i class='app-menu__icon bx bx-id-card'></i>
+                [routerLink]="'/manager-transaction/transactions'"><i class='app-menu__icon bx bx-id-card'></i>
                     <span class="app-menu__label">Thống kê hàng hóa</span></a></li>
 
         </ul>
