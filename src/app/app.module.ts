@@ -33,6 +33,7 @@ import { CreateEmployeeComponent } from './component/admin/director/create-emplo
 import { InsertEmployeeComponent } from './component/admin/manager-transaction/insert-employee/insert-employee.component';
 import { UpdateEmployeeComponent } from './component/admin/manager-storage/update-employee/update-employee.component';
 import { UpdateEmplComponent } from './component/admin/manager-transaction/update-empl/update-empl.component';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tracking', pathMatch: 'full' },
@@ -161,7 +162,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     JwtModule,
-    
+    CanvasJSAngularChartsModule
   ],
   providers: [TrackingOrderService, AuthGuardService, AuthService],
   bootstrap: [AppComponent]

@@ -1,14 +1,15 @@
 import { StorageOffices } from 'src/app/entity/storage-offices';
 import { DirectorService } from '../../../../service/director/director.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { TransactionOffices } from 'src/app/entity/transaction-offices';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-director',
   templateUrl: './director.component.html',
   styleUrls: ['./director.component.css']
 })
-export class DirectorComponent implements OnInit {
+export class DirectorComponent implements OnInit, AfterViewInit {
   tmp = '';
   username: string | null = '';
   storage_offices: StorageOffices[] = [];
@@ -18,10 +19,21 @@ export class DirectorComponent implements OnInit {
   countOffice : number = 0;
   countStorageOffice: number = 0;
   countTransactionOffice: number = 0;
-  constructor(private directorService: DirectorService) {
+  dataPoints:any = [];
+  chart:any;
+  constructor(private directorService: DirectorService, private http: HttpClient) {
     this.username = this.directorService.getUserName();
     this.getCountCustomer();
     this.getCountStorageOfficeAndTransactionOffice();
+  }
+  ngAfterViewInit(): void {
+    this.http.get('https://canvasjs.com/data/gallery/angular/btcusd2021.json', { responseType: 'json' }).subscribe((response: any) => {
+      let data = response;
+      for(let i = 0; i < data.length; i++){
+        this.dataPoints.push({x: new Date(data[i].date), y: Number(data[i].close) });
+      }
+      this.chart.subtitles[0].remove();
+    });
   }
 
   ngOnInit(): void {
@@ -62,6 +74,69 @@ export class DirectorComponent implements OnInit {
 
       console.log(this.countOffice);
   }
+
+  chartOptions = {
+    theme: "light2",
+    zoomEnabled: true,
+    exportEnabled: true,
+    title: {
+      text:"Thống kê giao dịch"
+    },
+    subtitles: [{
+      text: "Loading Data...",
+      fontSize: 24,
+      horizontalAlign: "center",
+      verticalAlign: "center",
+      dockInsidePlotArea: true
+    }],
+    axisY: {
+      title: "",
+      prefix: ""
+    },
+    data: [{
+      type: "line",
+      name: "Closing Price",
+      yValueFormatString: "$#,###.00",
+      xValueType: "dateTime",
+      dataPoints: this.dataPoints
+    }]
+  }
+ 
+  getChartInstance(chart: object) {
+    this.chart = chart;
+  }
+
+  chartOptionss = { 
+	  title: {
+		  text: "Số lượng đơn hàng"
+	  },
+	  theme: "light2",
+	  animationEnabled: true,
+	  exportEnabled: true,
+	  axisY: {
+		includeZero: true,
+		valueFormatString: "$#,##0k"
+	  },
+	  data: [{
+		type: "column", //change type to bar, line, area, pie, etc
+		yValueFormatString: "$#,##0k",
+		color: "#01b8aa",
+		dataPoints: [
+			{ label: "Jan", y: 172 },
+			{ label: "Feb", y: 189 },
+			{ label: "Mar", y: 201 },
+			{ label: "Apr", y: 240 },
+			{ label: "May", y: 166 },
+			{ label: "Jun", y: 196 },
+			{ label: "Jul", y: 218 },
+			{ label: "Aug", y: 167 },
+			{ label: "Sep", y: 175 },
+			{ label: "Oct", y: 152 },
+			{ label: "Nov", y: 156 },
+			{ label: "Dec", y: 164 }
+		]
+	  }]
+	}
 
   time() {
     var today = new Date();
