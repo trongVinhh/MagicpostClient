@@ -70,6 +70,10 @@ body {
   background-color: #FFF;
 }
 
+.fixed-navigation {
+  position: fixed;
+}
+
 [tabindex="-1"]:focus {
   outline: 0 !important;
 }

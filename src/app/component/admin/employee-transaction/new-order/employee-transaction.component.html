@@ -49,25 +49,7 @@
     </div>
     <hr>
     <app-navigation></app-navigation>
-    <!-- <ul class="app-menu">
-      <li><a class="app-menu__item active" href="employee-transaction.component.html" routerLink="/employee-transaction/createOrder"><i
-            class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Tạo đơn hàng mới</span></a></li>
-      <li><a class="app-menu__item " href="employee-transaction-createorder.component.html" routerLink="/employee-transaction/deliveryForm"><i
-            class='app-menu__icon bx bx-run'></i><span class="app-menu__label"> Tạo đơn chuyển đi</span></a></li>
-      <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/receiveOrder"><i
-            class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng đang đến điểm
-            giao dịch</span></a></li>
-      <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/sendOrder"><i
-            class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng gửi đi điểm
-            khác</span></a></li>
-    path: 'employee-transaction/shippingOrder',
-    <li><a class="app-menu__item " href="employee-transaction-createorder.component.html" routerLink="employee-transaction/shippingOrder"><i
-            class='app-menu__icon bx bx-run'></i><span class="app-menu__label">Thống kê đơn hàng đang giao</span></a>
-      </li>
-      <li><a class="app-menu__item " href="employee-transaction-createorder.component.html"><i
-            class='app-menu__icon bx bx-run'></i><span class="app-menu__label">Thống kê đơn hàng đã giao (chưa xử lý)</span></a>
-      </li>
-    </ul> -->
+      
   </aside>
   <main class="app-content">
     <div class="app-title">
@@ -100,8 +82,8 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label for="exampleSelect1" class="control-label">Miền</label>
-                  <select class="form-control" id="exampleSelect1" name="region" [(ngModel)]="regionCode"
-                    (ngModelChange)="getProvinceList()" formControlName="senderRegion">
+                  <select class="form-control" id="exampleSelect1" name="region" [(ngModel)]="senderRegionCode"
+                    (ngModelChange)="getSenderProvinceList()" formControlName="senderRegion">
                     <option [value]="0">-- Chọn miền --</option>
                     <option [value]=(1)>Miền Bắc</option>
                     <option [value]=(2)>Miền Trung</option>
@@ -110,8 +92,8 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label for="exampleSelect1" class="control-label">Tỉnh/Thành phố</label>
-                  <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="provinceCode"
-                    (ngModelChange)="getDistrictList()" formControlName="senderProvince">
+                  <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="senderProvinceCode"
+                    (ngModelChange)="getSenderDistrictList()" formControlName="senderProvince">
                     <option [value]="0">-- Chọn tỉnh/thành phố --</option>
                     <option *ngFor="let province of filteredProvinceList" [value]="province.name">{{province.name}}
                     </option>
@@ -119,8 +101,8 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Quận/Huyện</label>
-                  <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="districtCode"
-                    (ngModelChange)="getWardList()" formControlName="senderDistrict">
+                  <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="senderDistrictCode"
+                    (ngModelChange)="getSenderWardList()" formControlName="senderDistrict">
                     <option [value]="0">-- Chọn quận/huyện --</option>
                     <option *ngFor="let district of filteredDistrictList" [value]="district.name">{{district.name}}
                     </option>
@@ -147,8 +129,8 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Miền</label>
-                  <select class="form-control" id="exampleSelect1" name="region" [(ngModel)]="regionCode"
-                    (ngModelChange)="getProvinceList()" formControlName="receiverRegion">
+                  <select class="form-control" id="exampleSelect1" name="region" [(ngModel)]="receiverRegionCode"
+                    (ngModelChange)="getReceiverProvinceList()" formControlName="receiverRegion">
                     <option [value]="0">-- Chọn miền --</option>
                     <option [value]=(1)>Miền Bắc</option>
                     <option [value]=(2)>Miền Trung</option>
@@ -157,8 +139,8 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Tỉnh/Thành phố</label>
-                  <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="provinceCode"
-                    (ngModelChange)="getDistrictList()" formControlName="receiverProvince">
+                  <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="receiverProvinceCode"
+                    (ngModelChange)="getReceiverDistrictList()" formControlName="receiverProvince">
                     <option [value]="0">-- Chọn tỉnh/thành phố --</option>
                     <option *ngFor="let province of filteredProvinceList" [value]="province.name">{{province.name}}
                     </option>
@@ -166,8 +148,8 @@
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="exampleSelect1" class="control-label">Quận/Huyện</label>
-                  <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="districtCode"
-                    (ngModelChange)="getWardList()" formControlName="receiverDistrict">
+                  <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="receiverDistrictCode"
+                    (ngModelChange)="getReceiverWardList()" formControlName="receiverDistrict">
                     <option [value]="0">-- Chọn quận/huyện --</option>
                     <option *ngFor="let district of filteredDistrictList" [value]="district.name">{{district.name}}
                     </option>
@@ -221,11 +203,6 @@
                 <div class="form-group  col-md-4">
                   <label class="control-label">Tổng thu</label>
                   <input class="form-control" type="number" formControlName="totalPrice">
-                </div>
-
-                <div class="form-group  col-md-6">
-                  <label class="control-label">Ghi chú đơn hàng</label>
-                  <textarea class="form-control" rows="4"></textarea>
                 </div>
 
               </div>

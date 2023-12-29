@@ -129,6 +129,10 @@ dd {
   margin-left: 0;
 }
 
+.fixed-navigation {
+  position: fixed;
+}
+
 blockquote {
   margin: 0 0 1rem;
 }

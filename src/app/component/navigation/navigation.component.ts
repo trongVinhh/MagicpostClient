@@ -17,7 +17,7 @@ export class NavigationComponent {
     ).subscribe(() => {
       // Lấy route hiện tại sau khi thay đổi
       this.currentRoute = this.activatedRoute.snapshot.firstChild?.routeConfig?.path || '';
-      // console.log(this.currentRoute);
+      console.log(this.activatedRoute.snapshot.firstChild?.routeConfig?.path);
     });
   }
 

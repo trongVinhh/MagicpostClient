@@ -58,7 +58,9 @@ html {
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
-
+.fixed-navigation {
+  position: fixed;
+}
 body {
   margin: 0;
   font-family: var(--font-family-sarabun);
