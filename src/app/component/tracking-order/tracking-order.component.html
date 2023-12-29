@@ -67,7 +67,6 @@
                         </form>
                         <div *ngIf="notFound == false && trackingCodeValid == true && trackingInfo != null"
                             class="trackingInfo-container">
-                            <h3 class="trackingInfo-title">Thông tin đơn hàng</h3>
                             <div>
                                 <img src="assets/images/Track-your-order.jpg" alt="Girl in a jacket" height="auto" width="100%">
                             </div>
@@ -95,7 +94,7 @@
                                 <div class="trackingInfo-column justify-text">
                                     <div class="col-right">
                                         <i class="icon fas fa-warehouse"></i>
-                                        <span class="trackingInfo-label">Kho: {{trackingInfo.nameCurrentStorage}}</span>
+                                        <span class="trackingInfo-label">Kho hiện tại: {{trackingInfo.nameCurrentStorage}}</span>
                                     </div>
                                     <div class="col-right">
                                         <i class="icon fas fa-clock"></i>

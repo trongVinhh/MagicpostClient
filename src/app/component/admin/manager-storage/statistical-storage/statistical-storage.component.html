@@ -39,7 +39,7 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../image/me.jpg" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2019/12/9-Best-Online-Avatars-and-How-to-Make-Your-Own-for-Free-image1-5.png" width="50px"
         alt="User Image">
       <div>
         <p class="app-sidebar__user-name"><b>{{username}}</b></p>
@@ -77,38 +77,23 @@
                           id="sampleTable">
                             <thead>
                               <tr>
-                                <th width="10"><input type="checkbox" id="all"></th>
                                 <th>ID đơn hàng</th>
                                 <th>Khách hàng</th>
                                 <th>Đơn hàng</th>
                                 <th>Khối lượng</th>
                                 <th>Tổng tiền</th>
                                 <th>Tình trạng</th>
-                                <th>Tính năng</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>MD0837</td>
-                                <td>Triệu Thanh Phú</td>
-                                <td>Ghế làm việc Zuno, Bàn ăn gỗ Theresa</td>
-                                <td>2</td>
-                                <td>9.400.000 đ</td>
-                                <td><span class="badge bg-success">Nhận</span></td>
-                                <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                                  <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                              </tr>
+                              
                               <tr *ngFor="let order of allOrders">
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                 <td>{{order.id}}</td>
                                 <td>{{order.transaction.customerDto.firstName}}  {{order.transaction.customerDto.lastName}}</td>
                                 <td>{{order.transaction.orderCode}}</td>
                                 <td>{{order.transaction.mass}}</td>
                                 <td>{{order.transaction.totalPrice}}</td>
-                                <td><span class="badge bg-success">Nhận</span></td>
-                                <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                                  <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
+                                <td><span class="badge bg-success">{{order.status}}</span></td>
                               </tr>
                             </tbody>
                           </table>

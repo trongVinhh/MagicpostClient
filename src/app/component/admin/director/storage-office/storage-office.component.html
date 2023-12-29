@@ -40,7 +40,7 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="assets/images/me.jpg" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://png.pngtree.com/png-clipart/20190614/original/pngtree-web-page-ui-default-avatar-handsome-guy-png-image_3801746.jpg" width="50px"
         alt="User Image">
       <div>
         <p class="app-sidebar__user-name"><b>{{username}}</b></p>
@@ -97,21 +97,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>12345</td>
-                  <td>Dương Quảng Hàm</td>
-                  <td>
-                    Ngách 24 ngõ 79 Dương Quảng Hàm
-                  </td>
-                  <td>Nguyễn Đức Anh</td>
-                  <td><button class="btn btn-primary btn-sm trash" title="Xóa" onclick="myFunction()"><i
-                        class="fas fa-trash-alt"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp" data-toggle="modal"
-                      data-target="#ModalUP"><i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
+                
 
                 <tr *ngFor="let item of storage_offices">
                   <td>{{item.id}}</td>
@@ -141,52 +127,31 @@
         <div class="tile">
           <div class="tile-body">
             <div>
-              <h3 class="tile-title">Danh sách đơn hàng tại điểm tập kết</h3>
+              <h3 class="tile-title">Danh sách tất cả đơn hàng</h3>
             </div>
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
               id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"><input type="checkbox" id="all"></th>
                   <th>ID đơn hàng</th>
                   <th>Khách hàng</th>
                   <th>Vị trí</th>
                   <th>Khối lượng</th>
                   <th>Tổng tiền</th>
                   <th>Tình trạng</th>
-                  <th>Tính năng</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>MD0837</td>
-                  <td>Triệu Thanh Phú</td>
-                  <td>Ghế làm việc Zuno, Bàn ăn gỗ Theresa</td>
-                  <td>2</td>
-                  <td>9.400.000 đ</td>
-                  <td><span class="badge bg-success">Nhận</span></td>
-                  <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i
-                        class="fas fa-trash-alt"></i> </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i
-                        class="fa fa-edit"></i></button>
-                  </td>
-                </tr>
+                
                 <tr *ngFor="let item of allOrders">
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
                   <td>{{item.id}}</td>
                   <td>
                     {{item.transaction.customerDto.firstName}} {{item.transaction.customerDto.lastName}}
                   </td>
                   <td>{{item.currentStorageAddress}}</td>
                   <td>{{item.transaction.mass}}</td>
-                  <td>{{item.transaction.totalPrice}}</td>
-                  <td><span class="badge bg-danger">Gửi</span></td>
-                  <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i
-                        class="fas fa-trash-alt"></i> </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i
-                        class="fa fa-edit"></i></button>
-                  </td>
+                  <td>{{item.transaction.totalPrice | currency: 'VNĐ'}}</td>
+                  <td><span class="badge bg-danger">{{item.status}}</span></td>
                 </tr>
               </tbody>
             </table>
