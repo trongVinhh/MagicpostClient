@@ -15,6 +15,7 @@ export class StatisticalStorageComponent implements OnInit {
     allOrders: Order[] = [];
     username: string | null = '';
     storage_id!: StorageId;
+    id!: string;
     constructor(private directorService: DirectorService, private managerService: ManagerService) { 
       this.username = this.managerService.getUserName();
     }
@@ -25,11 +26,10 @@ export class StatisticalStorageComponent implements OnInit {
       this.managerService.getStorageIdByUsername(this.managerService.getUserName()).subscribe(
         data => {
           console.log(data);
-          this.storage_id = data;
-          console.log(this.storage_id.officeId);
+          this.id = data.officeId;
 
           // Get all orders of a storage
-          this.directorService.getAllOrdersOfStorage(this.storage_id.officeId).subscribe(
+          this.directorService.getAllOrdersOfStorage(this.id).subscribe(
             data => {
               console.log(data);
               this.allOrders = data;

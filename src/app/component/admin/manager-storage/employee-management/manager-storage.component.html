@@ -39,7 +39,7 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../image/me.jpg" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2019/12/9-Best-Online-Avatars-and-How-to-Make-Your-Own-for-Free-image1-5.png" width="50px"
         alt="User Image">
       <div>
         <p class="app-sidebar__user-name"><b>{{username}}</b></p>
@@ -72,43 +72,23 @@
             <div class="row element-button">
               <div class="col-sm-2">
 
-                <a class="btn btn-add btn-sm" href="../addemployee/addemployee.component.html" title="Thêm"><i class="fas fa-plus"></i>
+                <a class="btn btn-add btn-sm" href="../addemployee/addemployee.component.html" [routerLink]="'/manager-storage/create-employee'" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới nhân viên</a>
               </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
-                    class="fas fa-file-upload"></i> Tải từ file</a>
-              </div>
+              
 
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" (click)="printTable()"><i
                     class="fas fa-print"></i> In dữ liệu</a>
               </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
-                    class="fas fa-copy"></i> Sao chép</a>
-              </div>
-
-              <div class="col-sm-2">
-                <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
-                    class="fas fa-file-pdf"></i> Xuất PDF</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
-              </div>
+              
             </div>
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
               id="sampleTable">
               <thead>
                 <tr>
-                  <th width="10"><input type="checkbox" id="all"></th>
                   <th>ID nhân viên</th>
                   <th width="150">Họ và tên</th>
-                  <th width="20">Ảnh thẻ</th>
                   <th width="250">Địa chỉ</th>
                   <th>Ngày sinh</th>
                   <th>SĐT</th>
@@ -118,40 +98,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>#CD12837</td>
-                  <td>Hồ Thị Thanh Ngân</td>
-                  <td><img class="img-card-person" src="/img-anhthe/1.jpg" alt=""></td>
-                  <td>155-157 Trần Quốc Thảo, Quận 3, Hồ Chí Minh </td>
-                  <td>12/02/1999</td>
-                  <td>0926737168</td>
-                  <td>Email</td>
-                  <td>Bán hàng</td>
-                  <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                      onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                      data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr *ngFor="let employee of storage.employees">
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                
+                <tr *ngFor="let employee of employees">
                   <td>{{employee.id}}</td>
                   <td>{{employee.firstName}} {{employee.lastName}}</td>
-                  <td><img class="img-card-person" src="/img-anhthe/1.jpg" alt=""></td>
                   <td>{{employee.address}}</td>
                   <td>Ngày sinh</td>
                   <td>{{employee.phone}}</td>
                   <td>{{employee.email}}</td>
                   <td>{{employee.role[0].name}}</td>
-                  <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                      onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                      data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
+                  <td class="table-td-center">
+                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" (click)="displayForm(employee)"><i class="fas fa-edit"></i>
                     </button>
                   </td>
                 </tr>

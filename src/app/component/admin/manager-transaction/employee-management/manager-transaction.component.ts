@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TransactionId } from 'src/app/entity/transaction-id';
 import { TransactionOffices } from 'src/app/entity/transaction-offices';
 import { DirectorService } from 'src/app/service/director/director.service';
@@ -14,8 +15,10 @@ export class ManagerTransactionComponent implements OnInit {
   transaction!: TransactionOffices;
   username: string | null = '';
   transaction_id!: TransactionId;
-
-  constructor(private directorService: DirectorService, private managerService: ManagerService) { 
+  selectedEmployee!: any;
+  constructor(private directorService: DirectorService, 
+    private managerService: ManagerService, 
+    private router: Router) { 
     this.username = this.managerService.getUserName();
   }
 
@@ -43,6 +46,24 @@ export class ManagerTransactionComponent implements OnInit {
         )
       }
     )
+  }
+
+  displayForm(emplpoyee: any) {
+    this.selectedEmployee = emplpoyee;
+    console.log(this.selectedEmployee);
+    sessionStorage.setItem('selectedEmployee', JSON.stringify(this.selectedEmployee));
+    this.router.navigate(['/manager-transaction/update-employee']);
+  }
+
+  //test in dữ liệu oke
+  printTable() {
+    let tab = document.getElementById('sampleTable') as HTMLTableElement;
+    let win = window.open('', '', 'height=700,width=700');
+    if (win) {
+      win.document.write(tab.outerHTML);
+      win.document.close();
+      win.print();
+    }
   }
 
   time() {

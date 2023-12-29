@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/entity/order';
 import { StorageId } from 'src/app/entity/storage-id';
 import { StorageOffices } from 'src/app/entity/storage-offices';
@@ -10,13 +11,19 @@ import { ManagerService } from 'src/app/service/manager/manager.service';
   styleUrls: ['./manager-storage.component.css']
 })
 export class ManagerStorageComponent implements OnInit {
+
   tmp = '';
   storage!: StorageOffices;
   username: string | null = '';
   storage_id!: StorageId;
-
-  constructor(private directorService: DirectorService, private managerService: ManagerService) { 
+  id!: string;
+  employees!: any;
+  selectedEmployee!: any;
+  constructor(private directorService: DirectorService, private managerService: ManagerService,
+    private router: Router) {
     this.username = this.managerService.getUserName();
+    this.getStorageIdByUsername();
+    // this.getStorageByStorageId();
   }
 
   //test in dữ liệu oke
@@ -32,24 +39,51 @@ export class ManagerStorageComponent implements OnInit {
 
   ngOnInit(): void {
     this.time();
+  }
 
+  displayForm(emplpoyee: any) {
+    this.selectedEmployee = emplpoyee;
+    sessionStorage.setItem('selectedEmployee', JSON.stringify(this.selectedEmployee));
+    this.router.navigate(['/manager-storage/update-employee']);
+  }
+  getStorageIdByUsername() {
     this.managerService.getStorageIdByUsername(this.managerService.getUserName()).subscribe(
       data => {
         console.log(data);
-        this.storage_id = data;
-        console.log(this.storage_id.officeId);
-
+        this.id = data.officeId;
+        // this.storage_id = data;
+        // console.log(this.storage_id.officeId);
         // Get all orders of a storage
-        this.managerService.getStorageByStorageId(this.storage_id.officeId).subscribe(
+        this.managerService.getStorageByStorageId(this.id).subscribe(
           data => {
             console.log(data);
             this.storage = data;
-            this.storage.employees.forEach(employee => {
-                console.log(employee.role[0].name);
-              
-            });
+            console.log(this.storage);
+            this.employees = this.storage.employees;
+            console.log(this.employees);
           }
         )
+      }
+    )
+  }
+
+  getStorageByStorageId() {
+    // Get all orders of a storage
+    this.managerService.getStorageByStorageId(this.id).subscribe(
+      data => {
+        console.log(data);
+        this.storage = data;
+        console.log(this.storage);
+        this.employees = this.storage.employees;
+        console.log(this.employees);
+      }
+    )
+  }
+
+  getEmployeeByStorageId() {
+    this.managerService.getStorageByStorageId(this.storage_id.officeId).subscribe(
+      data => {
+        console.log(data);
       }
     )
   }
@@ -66,7 +100,7 @@ export class ManagerStorageComponent implements OnInit {
     weekday[6] = "Thứ Bảy";
     var day = weekday[today.getDay()];
     var dd: string | number = today.getDate();
-    var mm:string | number = today.getMonth() + 1;
+    var mm: string | number = today.getMonth() + 1;
     var yyyy = today.getFullYear();
     var h = today.getHours();
     var m = this.checkTime(today.getMinutes());

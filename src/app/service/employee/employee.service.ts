@@ -15,7 +15,7 @@ import { Transaction } from 'src/app/entity/transaction';
 export class EmployeeService {
   private baseUrl = "http://localhost:8080/api/v1/employee";
   private customerUrl = "http://localhost:8080/api/v1/customer";
-
+  private baseUrlEmployee = "http://localhost:8080/api/v1/employee";
   //API tỉnh thành phố 
   private baseUrlCity = "https://thongtindoanhnghiep.co/api/city";
   username: string | null = '';
@@ -44,11 +44,21 @@ export class EmployeeService {
     return this.httpClient.get<Customer[]>(`${this.customerUrl}/phone?phone=${phone}`, { headers: this.headers });
   }
 
+  createEmployee(employee: any, role: number): Observable<any> {
+    console.log(`${this.baseUrlEmployee}/role/${role}`)
+    return this.httpClient.post<any>(`${this.baseUrlEmployee}/role/${role}`, employee, { headers: this.headers });
+  }
+
+  updateEmployee(employee: any, role: number): Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrlEmployee}/${employee.id}/role/${role}/update`, employee, { headers: this.headers });
+  }
+
   // chuyển hàng từ điểm giao dịch tới kho
   sendPackageFromTransToWarehouse(transactionOfficeId: string, storageId: string, orderCode: string): Observable<any> {
     const params = {transactionOfficeId, storageId, orderCode};
     return this.httpClient.post<any>(`${this.baseUrl}/sendPackageFromTransToWarehouse`, null ,{params, headers: this.headers });
   }
+
 
   // Danh sách đơn hàng gửi tới kho
   packageTransferToStorageOffice(storageId: string): Observable<any> {
@@ -70,8 +80,8 @@ export class EmployeeService {
   }
   
   // Chuyển đơn hàng từ kho này sang kho khác
-  sendPackageFromWarehouseToWarehouse(targetStorageId: string, currentStorageId: string, orderCode: string): Observable<any> {
-    const params = { targetStorageId, currentStorageId, orderCode};
+  sendPackageFromWarehouseToWarehouse(receivedStorageId: string, currStorageId: string, orderCode: string): Observable<any> {
+    const params = { receivedStorageId, currStorageId, orderCode};
     return this.httpClient.post<any>(`${this.baseUrl}/sendPackageFromWarehouseToWarehouse`, null ,{params, headers: this.headers });
   }
 
@@ -117,7 +127,8 @@ export class EmployeeService {
   // Thống kê các đơn hàng đã giao thành công, các đơn hàng chuyển không thành công và trả lại điểm giao dịch
   getAllPackageDelivering() {
     return this.httpClient.get<any>(`${this.baseUrl}/statisticPackageDelivering`, {headers: this.headers});
-  }
+  }  
+  
 
   // getStorageIdByUsername(username: string | null): Observable<StorageId> {
   //   return this.httpClient.get<StorageId>(`${this.baseUrl}/getStorageIdByUsername?username=${username}`, {headers: this.headers});

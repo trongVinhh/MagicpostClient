@@ -5,5 +5,6 @@ export interface TransactionOffices {
   name: string;
   hotline: string;
   address: string;
+  email: string;
   employees: Employee[];
 }

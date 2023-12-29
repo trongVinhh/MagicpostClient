@@ -14,4 +14,5 @@ export interface Transaction {
   date: Date;
   packageType: string;
   postage: number;
+  status: string;
 }

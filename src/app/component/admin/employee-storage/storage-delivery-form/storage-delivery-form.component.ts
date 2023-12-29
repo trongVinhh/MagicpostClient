@@ -14,6 +14,7 @@ import { ManagerService } from 'src/app/service/manager/manager.service';
   styleUrls: ['./storage-delivery-form.component.css']
 })
 export class StorageDeliveryFormComponent implements OnInit {
+  type_destination: string= '';
   storageDeliveryForm: FormGroup = new FormGroup({});
   orderCode: string = '';
   officeId: string = '';
@@ -41,9 +42,15 @@ export class StorageDeliveryFormComponent implements OnInit {
       this.orderCode = params['orderCode'];
     })
 
-    if (this.storageDeliveryForm.get('type')?.value == 'Điểm tập kết') {
+    
+  }
+
+  onTypeChange() {
+    this.type_destination = this.storageDeliveryForm.get('type')?.value;
+    console.log(this.type_destination);
+    if (this.type_destination === 'Điểm tập kết') {
       this.getStorageList();
-    } else {    
+    } else if (this.type_destination === 'Điểm giao dịch') {
       this.getTransactionList();
     }
   }
@@ -68,7 +75,7 @@ export class StorageDeliveryFormComponent implements OnInit {
         console.log(response);
       })
       console.log('Đem đến điểm giao dịch')
-    } else {
+    } else if (this.storageDeliveryForm.get('type')?.value === 'Điểm tập kết'){
       this.employeeService.sendPackageFromWarehouseToWarehouse(this.destinationId, this.officeId, this.orderCode).subscribe(response => {
         alert("Đã gửi đơn đến kho tập kết");
         console.log(response);

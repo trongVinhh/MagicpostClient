@@ -38,7 +38,7 @@
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
         <div class="app-sidebar__user">
-            <img class="app-sidebar__user-avatar" src="assets/images/me.jpg" width="50px" alt="User Image" />
+            <img class="app-sidebar__user-avatar" src="https://png.pngtree.com/png-clipart/20190614/original/pngtree-web-page-ui-default-avatar-handsome-guy-png-image_3801746.jpg" width="50px" alt="User Image" />
             <div>
                 <p class="app-sidebar__user-name"><b>{{username}}</b></p>
                 <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
@@ -98,7 +98,7 @@
                             <i class="icon bx bxs-user-account fa-3x"></i>
                             <div class="info">
                                 <h4>Tổng khách hàng</h4>
-                                <p><b>56 khách hàng</b></p>
+                                <p><b>{{customerCount}} khách hàng</b></p>
                                 <p class="info-tong">Tổng số khách hàng được quản lý.</p>
                             </div>
                         </div>
@@ -108,9 +108,9 @@
                         <div class="widget-small info coloured-icon">
                             <i class="icon bx bxs-data fa-3x"></i>
                             <div class="info">
-                                <h4>Tổng sản phẩm</h4>
-                                <p><b>1850 sản phẩm</b></p>
-                                <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
+                                <h4>Tổng quầy giao dịch và kho</h4>
+                                <p><b>{{countOffice}} văn phòng</b></p>
+                                <p class="info-tong">Tổng số văn phòng và kho.</p>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                             <i class="icon bx bxs-shopping-bags fa-3x"></i>
                             <div class="info">
                                 <h4>Điểm giao dịch</h4>
-                                <p><b>45 điểm </b></p>
+                                <p><b>{{countTransactionOffice}} điểm </b></p>
                                 <p class="info-tong">Tổng số điểm giao dịch trên cả nước.</p>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                             <i class="icon bx bxs-error-alt fa-3x"></i>
                             <div class="info">
                                 <h4>Điểm tập kết</h4>
-                                <p><b>40 điểm</b></p>
+                                <p><b>{{countStorageOffice}} điểm</b></p>
                                 <p class="info-tong">Tổng số điểm tập kết trên cả nước.</p>
                             </div>
                         </div>
@@ -148,15 +148,15 @@
                                             <th>ID</th>
                                             <th>Tên điểm</th>
                                             <th>Vị trí</th>
-                                            <th>Danh sách nhân viên</th>
+                                            <th>Số lượng nhân viên</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>12345</td>
-                                            <td>Dương Quảng Hàm</td>
-                                            <td>Ngách 24 ngõ 79 Dương Quảng Hàm</td>
-                                            <td>datnguyen1854</td>
+                                        <tr *ngFor="let item of transaction_offices">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.address}}</td>
+                                            <td>{{item.employees.length}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -176,21 +176,15 @@
                                             <th>ID</th>
                                             <th>Tên điểm</th>
                                             <th>Vị trí</th>
-                                            <th>Danh sách nhân viên</th>
+                                            <th>Số lượng nhân viên</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>#183</td>
-                                            <td>Đình Thôn</td>
-                                            <td>74 Đình Thôn</td>
-                                            <td>Đức Anh</td>
-                                        </tr>
-                                        <tr>
-                                            <td>#183</td>
-                                            <td>Đình Thôn</td>
-                                            <td>74 Đình Thôn</td>
-                                            <td>Đức Anh</td>
+                                        <tr *ngFor="let item of storage_offices">
+                                            <td>{{item.id}}</td>
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.address}}</td>
+                                            <td>{{item.employees.length}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -207,16 +201,20 @@
                     <div class="col-md-12">
                         <div class="tile">
                             <h3 class="tile-title">Thống kê điểm giao dịch</h3>
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+                            <div class="">
+                                  <div>
+                                    <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
+                                  </div>  
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="tile">
                             <h3 class="tile-title">Thống kê điểm tập kết</h3>
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
+                            <div class="">
+                                <div>
+                                    <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height: '360px'}"></canvasjs-chart>    
+                                </div>  
                             </div>
                         </div>
                     </div>
@@ -247,7 +245,7 @@
     <!--===============================================================================================-->
     <script src="js/plugins/pace.min.js"></script>
     <!--===============================================================================================-->
-    <script type="text/javascript" src="js/plugins/chart.js"></script>
+    <script type="text/javascript" src="js/chart.js"></script>
     <!--===============================================================================================-->
     
     <script type="text/javascript">
