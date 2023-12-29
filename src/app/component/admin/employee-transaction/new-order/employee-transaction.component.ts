@@ -88,25 +88,44 @@ export class EmployeeTransactionComponent implements OnInit {
   //Api tỉnh thành 
   private baseUrl = "https://provinces.open-api.vn/api/";
   regionList = ["Miền Bắc", "Miền Trung", "Miền Nam"];
-  regionCode: number = 0;
+  senderRegionCode: number = 0;
+  receiverRegionCode: number = 0;
   provinceList: Province[] = [];
   filteredProvinceList: Province[] = [];
-  provinceCode: number = 0;
+  senderProvinceCode: number = 0;
+  receiverProvinceCode: number = 0;
   districtList: District[] = [];
   filteredDistrictList: District[] = [];
-  districtCode: number = 0;
+  senderDistrictCode: number = 0;
+  receiverDistrictCode: number = 0;
   wardList: Ward[] = [];
   filteredWardList: Ward[] = [];
-  wardCode: number = 0;
+  senderWardCode: number = 0;
+  receiverWardCode: number = 0;
   separateRegion = [[1, 37], [38, 68], [70, 96]];
   limitProvince: number[] = [];
 
 
   //Lấy region code và lọc tỉnh thành theo region code
-  getProvinceList() {
-    if (this.regionCode == 1) {
+  getSenderProvinceList() {
+    if (this.senderRegionCode == 1) {
       this.limitProvince = this.separateRegion[0];
-    } else if (this.regionCode == 2) {
+    } else if (this.senderRegionCode == 2) {
+      this.limitProvince = this.separateRegion[1];
+    } else {
+      this.limitProvince = this.separateRegion[2];
+    }
+
+    this.filteredProvinceList = this.provinceList.filter((province: Province) => {
+      return province.code >= this.limitProvince[0] && province.code <= this.limitProvince[1];
+    });
+    console.log(this.filteredProvinceList);
+  }
+
+  getReceiverProvinceList() {
+    if (this.receiverRegionCode == 1) {
+      this.limitProvince = this.separateRegion[0];
+    } else if (this.receiverRegionCode == 2) {
       this.limitProvince = this.separateRegion[1];
     } else {
       this.limitProvince = this.separateRegion[2];
@@ -118,7 +137,7 @@ export class EmployeeTransactionComponent implements OnInit {
     console.log(this.filteredProvinceList);
   }
   
-  //
+  
   getProvinceCode(provinceName: string): number {
     for (let province of this.filteredProvinceList) {
       if (province.name == provinceName) {
@@ -127,11 +146,18 @@ export class EmployeeTransactionComponent implements OnInit {
     }
     return 0;
   }
-
   
-  getDistrictList() {
+  getSenderDistrictList() {
     this.filteredDistrictList = this.districtList.filter((district: District) => {
       return district.province_code == this.getProvinceCode(this.orderForm.get('senderProvince')?.value);
+    });
+
+    console.log(this.filteredDistrictList);
+  }
+
+  getReceiverDistrictList() {
+    this.filteredDistrictList = this.districtList.filter((district: District) => {
+      return district.province_code == this.getProvinceCode(this.orderForm.get('receiverProvince')?.value);
     });
 
     console.log(this.filteredDistrictList);
@@ -146,9 +172,17 @@ export class EmployeeTransactionComponent implements OnInit {
     return 0;
   }
 
-  getWardList() {
+  getSenderWardList() {
     this.filteredWardList = this.wardList.filter((ward: Ward) => {
       return ward.district_code == this.getDistrictCode(this.orderForm.get('senderDistrict')?.value);
+    });
+
+    console.log(this.filteredWardList);
+  }
+
+  getReceiverWardList() {
+    this.filteredWardList = this.wardList.filter((ward: Ward) => {
+      return ward.district_code == this.getDistrictCode(this.orderForm.get('receiverDistrict')?.value);
     });
 
     console.log(this.filteredWardList);

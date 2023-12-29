@@ -124,6 +124,10 @@ dt {
   font-weight: 700;
 }
 
+.fixed-navigation {
+  position: fixed;
+}
+
 dd {
   margin-bottom: .5rem;
   margin-left: 0;

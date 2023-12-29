@@ -90,7 +90,6 @@
                   <th>ID nhân viên</th>
                   <th width="150">Họ và tên</th>
                   <th width="250">Địa chỉ</th>
-                  <th>Ngày sinh</th>
                   <th>SĐT</th>
                   <th>Email</th>
                   <th>Chức vụ</th>
@@ -103,12 +102,11 @@
                   <td>{{employee.id}}</td>
                   <td>{{employee.firstName}} {{employee.lastName}}</td>
                   <td>{{employee.address}}</td>
-                  <td>Ngày sinh</td>
                   <td>{{employee.phone}}</td>
                   <td>{{employee.email}}</td>
                   <td>{{employee.role[0].name}}</td>
                   <td class="table-td-center">
-                    <button class="btn btn-primary btn-sm trash" style="margin: 2px;" type="button" title="Xóa" (click)="checkClick(employee)"><i
+                    <button class="btn btn-primary btn-sm trash mr-2" type="button" title="Xóa" (click)="checkClick(employee)"><i
                       class="fas fa-trash-alt"></i> </button>
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" (click)="displayForm(employee)"><i class="fas fa-edit"></i>
                     </button>

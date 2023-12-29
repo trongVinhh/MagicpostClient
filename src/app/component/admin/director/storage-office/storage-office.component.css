@@ -15661,3 +15661,13 @@ text-align:center;
   background-color: white;
   color: white;
 }
+
+.horizontal-scroll-container {
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap; /* Prevent content from wrapping to the next line */
+}
+
+.table {
+  width: 800px;
+}
