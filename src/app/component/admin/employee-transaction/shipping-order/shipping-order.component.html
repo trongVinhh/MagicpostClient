@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="./storage-received-order.component.css">
+  <link rel="stylesheet" type="text/css" href="./shipping-order.component.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -43,18 +44,11 @@
         width="50px" alt="User Image">
       <div>
         <p class="app-sidebar__user-name"><b>{{username}}</b></p>
-        <p class="app-sidebar__user-designation">Nhân viên tập kết</p>
+        <p class="app-sidebar__user-designation">Nhân viên giao dịch</p>
       </div>
     </div>
     <hr>
-    <ul class="app-menu">
-      <li><a class="app-menu__item " href="employee-transaction-createorder.component.html" routerLink="/employee-storage/storageDeliveryForm"><i
-            class='app-menu__icon bx bx-run'></i><span class="app-menu__label">Tạo đơn chuyển đi</span></a></li>
-      <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-storage/storageReceivedOrder"><i
-            class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng đang đến điểm tập kết</span></a></li>
-      <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-storage/storageSentOrder"><i
-            class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng đang ở điểm tập kết</span></a></li>
-    </ul>
+    <app-navigation></app-navigation>
   </aside>
   <main class="app-content">
     <div class="app-title">
@@ -97,18 +91,24 @@
                   <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i
                         class="fas fa-trash-alt"></i> </button>
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i
-                        class="fa fa-edit" [routerLink]="['/employee-storage/storageDeliveryForm']"></i></button>
+                        class="fa fa-edit"></i></button>
                   </td>
                 </tr>
-                <tr *ngFor="let order of allOrders, let index = index">
+                <tr *ngFor="let transaction of allShippingTransactions, let index = index">
                   <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>{{order.id}}</td>
-                  <td>{{order.from}}</td>
-                  <td>{{order.orderCode}}</td>
-                  <td>{{order.endOffice}}</td>
-                  <td><button class="badge" [ngClass]="{'bg-success': isConfirmed, 'bg-danger': !isConfirmed}" (click)="confirmOrder(order.orderCode, order.endOffice)">Xác nhận</button></td>
+                  <td>{{transaction.id}}</td>
+                  <td>{{transaction.orderCode}}</td>
+                  <td>{{transaction.status}}</td>
+                  <td><select [(ngModel)]="shippingStatus" (change)="onShippingStatusChange(transaction.orderCode)">
+                    <option>Đang giao</option>
+                    <option value="Đã giao hàng">Đã giao</option>
+                    <option value="Giao hàng thất bại">Giao hàng thất bại</option>
+                    <!-- Thêm các option khác nếu cần -->
+                  </select>
+                  </td>
+                  <!-- <td><span class="badge bg-danger">Đang giao</span></td> -->
                   <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i
-                        class="fas fa-trash-alt"></i> </button>
+                        class="fas fa-trash-alt"></i></button>
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i
                         class="fa fa-edit"></i></button>
                   </td>

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="employee-statistical.component.css">
+  <link rel="stylesheet" type="text/css" href="./receive-order.component.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -47,16 +47,7 @@
       </div>
     </div>
     <hr>
-    <ul class="app-menu">
-
-      <li><a class="app-menu__item " href="../home/employee-transaction.component.html"
-          routerLink="/employee-transaction/home"><i class='app-menu__icon bx bx-task'></i>
-          <span class="app-menu__label">Tạo đơn chuyển đi</span></a></li>
-      <li><a class="app-menu__item active" href="statistical-transaction-order.component.html"
-          routerLink="/employee-transaction/transactions"><i class='app-menu__icon bx bx-user-voice'></i>
-          <span class="app-menu__label">Thống kê đơn hàng gửi đến điểm giao dịch</span></a></li>
-
-    </ul>
+    <app-navigation></app-navigation>
   </aside>
   <main class="app-content">
     <div class="app-title">
@@ -102,13 +93,13 @@
                         class="fa fa-edit"></i></button>
                   </td>
                 </tr>
-                <tr *ngFor="let transaction of allTransactions, let index = index">
+                <tr *ngFor="let transaction of allComingTransactions, let index = index">
                   <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                  <td>{{transaction.id}}</td>
+                  <td>{{transaction.from}}</td>
                   <td>{{transaction.orderCode}}</td>
-                  <td>{{transaction.customerDto.firstName}} {{transaction.customerDto.lastName}}</td>
-                  <td>{{transaction.mass}}</td>
-                  <td>{{transaction.totalPrice}}</td>
-                  <td><span class="badge bg-danger">Gửi</span></td>
+                  <td>{{transaction.endOffice}}</td>
+                  <td><span class="badge bg-danger" (click)="confirmOrder(transaction.orderCode, transaction.endOffice)">Xác nhận</span></td>
                   <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i
                         class="fas fa-trash-alt"></i> </button>
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i

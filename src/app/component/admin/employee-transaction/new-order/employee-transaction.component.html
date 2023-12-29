@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="employee-transaction.component.css">
+  <link rel="stylesheet" type="text/css" href="./employee-transaction.component.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -48,15 +48,26 @@
       </div>
     </div>
     <hr>
-    <ul class="app-menu">
-      <li><a class="app-menu__item active" href="employee-transaction.component.html"
-          routerLink="/employee-transaction/home"><i class='app-menu__icon bx bx-task'></i><span
-            class="app-menu__label">Tạo đơn hàng mới</span></a></li>
-      <li><a class="app-menu__item " href="../employee-statistical/employee-statistical.component.html"
-          routerLink="/employee-transaction/transactions"><i class='app-menu__icon bx bx-user-voice'></i><span
-            class="app-menu__label">Thống kê đơn hàng gửi đến điểm giao dịch</span></a></li>
-
-    </ul>
+    <app-navigation></app-navigation>
+    <!-- <ul class="app-menu">
+      <li><a class="app-menu__item active" href="employee-transaction.component.html" routerLink="/employee-transaction/createOrder"><i
+            class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Tạo đơn hàng mới</span></a></li>
+      <li><a class="app-menu__item " href="employee-transaction-createorder.component.html" routerLink="/employee-transaction/deliveryForm"><i
+            class='app-menu__icon bx bx-run'></i><span class="app-menu__label"> Tạo đơn chuyển đi</span></a></li>
+      <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/receiveOrder"><i
+            class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng đang đến điểm
+            giao dịch</span></a></li>
+      <li><a class="app-menu__item " href="statistical-transaction-order.component.html" routerLink="/employee-transaction/sendOrder"><i
+            class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Thống kê đơn hàng gửi đi điểm
+            khác</span></a></li>
+    path: 'employee-transaction/shippingOrder',
+    <li><a class="app-menu__item " href="employee-transaction-createorder.component.html" routerLink="employee-transaction/shippingOrder"><i
+            class='app-menu__icon bx bx-run'></i><span class="app-menu__label">Thống kê đơn hàng đang giao</span></a>
+      </li>
+      <li><a class="app-menu__item " href="employee-transaction-createorder.component.html"><i
+            class='app-menu__icon bx bx-run'></i><span class="app-menu__label">Thống kê đơn hàng đã giao (chưa xử lý)</span></a>
+      </li>
+    </ul> -->
   </aside>
   <main class="app-content">
     <div class="app-title">

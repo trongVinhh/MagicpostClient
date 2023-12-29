@@ -47,9 +47,9 @@ export class LoginComponent implements OnInit {
           } else if (sessionStorage.getItem('role') == 'ROLE_MANAGER_TRANSACTION') {
             this.router.navigate(['/manager-transaction/home']);
           } else if (sessionStorage.getItem('role') == 'ROLE_EMPLOYEE_STORAGE') {
-            this.router.navigate(['/employee-storage/home']);
+            this.router.navigate(['/employee-storage/storageSentOrder']);
           } else if (sessionStorage.getItem('role') == 'ROLE_EMPLOYEE_TRANSACTION') {
-            this.router.navigate(['/employee-transaction/home']);
+            this.router.navigate(['/employee-transaction/currentOrder']);
           }
         },
         (error) => {

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/entity/order';
 import { PackageTransfer } from 'src/app/entity/package_transfer';
-import { StorageId } from 'src/app/entity/storage-id';
 import { Transaction } from 'src/app/entity/transaction';
 import { TransactionId } from 'src/app/entity/transaction-id';
 import { DirectorService } from 'src/app/service/director/director.service';
@@ -9,54 +7,49 @@ import { EmployeeService } from 'src/app/service/employee/employee.service';
 import { ManagerService } from 'src/app/service/manager/manager.service';
 
 @Component({
-  selector: 'app-storage-received-order',
-  templateUrl: './storage-received-order.component.html',
-  styleUrls: ['./storage-received-order.component.css']
+  selector: 'app-receive-order',
+  templateUrl: './receive-order.component.html',
+  styleUrls:['./receive-order.component.css']
 })
-export class StorageReceivedOrderComponent implements OnInit {
+export class ReceiveOrderComponent implements OnInit {
 
-    tmp = '';
+  tmp = '';
+    allComingTransactions: PackageTransfer[] = [];
     username: string | null = '';
-    storage_id!: StorageId;
-    allOrders: PackageTransfer[] = [];
-    isConfirmed: boolean = false;
+    transaction_id!: TransactionId;
     constructor(private directorService: DirectorService, private managerService: ManagerService, private employeeService: EmployeeService) { 
       this.username = this.employeeService.getUserName();
     }
-
   
     ngOnInit(): void {
       this.time();
 
-      this.managerService.getStorageIdByUsername(this.employeeService.getUserName()).subscribe(
+      this.managerService.getTransactionIdByUsername(this.employeeService.getUserName()).subscribe(
         data => {
           console.log(data);
-          this.storage_id = data;
-          console.log(this.storage_id.officeId);
+          this.transaction_id = data;
+          console.log(this.transaction_id.officeId);
 
           // Get all orders of a storage
-          this.employeeService.packageTransferToStorageOffice(this.storage_id.officeId).subscribe(
+          this.employeeService.packageTransferToTransactionOffice(this.transaction_id.officeId).subscribe(
             data => {
               console.log(data);
-              this.allOrders = data;
-              console.log(this.allOrders);
+              this.allComingTransactions = data;
             }
           )
         }
       )
     }
 
-    confirmOrder(orderCode: string, storageId: string): void {
-      this.employeeService.confirmPackageReceived(orderCode, storageId).subscribe(
+    confirmOrder(orderCode: string, transactionId: string): void {
+      this.employeeService.confirmPackageReceived2(orderCode, transactionId).subscribe(
         data => {
           console.log(data);
-          this.isConfirmed = true;
           alert("Đã xác nhận đơn hàng");
         }
       )
     }
 
-    
 
     time() {
       var today = new Date();

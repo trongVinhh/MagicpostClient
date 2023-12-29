@@ -1,4 +1,4 @@
-import { EmployeeStatisticalComponent } from './component/admin/employee-transaction/employee-statistical/employee-statistical.component';
+
 import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -7,10 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TrackingOrderService} from './service/track-order/tracking-order.service';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { EmployeeTransactionComponent } from './component/admin/employee-transaction/home/employee-transaction.component';
-import { EmployeeStorageComponent } from './component/admin/employee-storage/employee-storage.component';
-import { ManagerTransactionComponent } from './component/admin/manager-transaction/home/manager-transaction.component';
-import { ManagerStorageComponent } from './component/admin/manager-storage/home/manager-storage.component';
+import { EmployeeTransactionComponent } from './component/admin/employee-transaction/new-order/employee-transaction.component';
+import { ManagerTransactionComponent } from './component/admin/manager-transaction/employee-management/manager-transaction.component';
 import { DirectorComponent } from './component/admin/director/main/director.component';
 import { TrackingOrderComponent } from './component/tracking-order/tracking-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,32 +26,91 @@ import { ContactComponent } from './component/contact/contact.component';
 import { StatisticalStorageComponent } from './component/admin/manager-storage/statistical-storage/statistical-storage.component';
 import { StatisticalTransactionComponent } from './component/admin/manager-transaction/statistical-transaction/statistical-transaction.component';
 import { EmployeeManagementComponent } from './component/admin/director/employee-management/employee-management.component';
+import { ReceiveOrderComponent } from './component/admin/employee-transaction/receive-order/receive-order.component';
+import { StorageDeliveryFormComponent } from './component/admin/employee-storage/storage-delivery-form/storage-delivery-form.component';
+import { StorageReceivedOrderComponent } from './component/admin/employee-storage/storage-received-order/storage-received-order.component';
+import { SendingOrderComponent } from './component/admin/employee-transaction/sending-order/sending-order.component';
+import { ShippingOrderComponent } from './component/admin/employee-transaction/shipping-order/shipping-order.component';
+import { DeliveryFormComponent } from './component/admin/employee-transaction/delivery-form/delivery-form.component';
+import { StorageSentOrderComponent } from './component/admin/employee-storage/storage-sent-order/storage-sent-order.component';
+import { CurrentOrderComponent } from './component/admin/employee-transaction/current-order/current-order.component';
+import { ManagerStorageComponent } from './component/admin/manager-storage/employee-management/manager-storage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tracking', pathMatch: 'full' },
   
   { path: 'tracking', component: TrackingOrderComponent },
+
   { path: 'home', component: TrackingOrderComponent },
+
   { path: 'tracking/:id', component: TrackingOrderComponent },
   
+  // Router for employee-transaction
   { 
-    path: 'employee-transaction/home', 
+    path: 'employee-transaction/deliveryForm', 
+    component: DeliveryFormComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
+  },
+
+  { 
+    path: 'employee-transaction/createOrder', 
     component: EmployeeTransactionComponent ,
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
   },
 
   { 
-    path: 'employee-transaction/transactions', 
-    component: EmployeeStatisticalComponent,
+    path: 'employee-transaction/currentOrder', 
+    component: CurrentOrderComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
+  },
+
+  { 
+    path: 'employee-transaction/receiveOrder', 
+    component: ReceiveOrderComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
+  },
+
+  { 
+    path: 'employee-transaction/sendOrder', 
+    component: SendingOrderComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
+  },
+
+  { 
+    path: 'employee-transaction/shippingOrder',
+    component: ShippingOrderComponent,
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
   },
   
-  { path: 'employee-storage', component: EmployeeStorageComponent },
+  // Router for employee-storage
+  { path: 'employee-storage/storageDeliveryForm', 
+    component: StorageDeliveryFormComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_EMPLOYEE_STORAGE'] }
+  },
+
+  { path: 'employee-storage/storageReceivedOrder', 
+    component: StorageReceivedOrderComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_EMPLOYEE_STORAGE'] }
+  },
+
+  { path: 'employee-storage/storageSentOrder', 
+    component: StorageSentOrderComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_EMPLOYEE_STORAGE'] }
+  },
+
   {path: 'aboutUs', component: AboutUsComponent},
   {path: 'service', component: ServiceComponent},
-  { path: 'contact', component: ContactComponent},  
+  { path: 'contact', component: ContactComponent}, 
+
   { 
     path: 'manager-transaction/home', 
     component: ManagerTransactionComponent,
@@ -113,10 +170,7 @@ const routes: Routes = [
     AppComponent,
     TrackingOrderComponent,
     EmployeeTransactionComponent,
-    EmployeeStorageComponent,
     ManagerTransactionComponent,
-    ManagerStorageComponent,
-    DirectorComponent,
     LoginComponent,
     RegisterComponent,
     NavigationComponent,
@@ -125,7 +179,16 @@ const routes: Routes = [
     AboutUsComponent,
     ServiceComponent,
     ContactComponent,
-    EmployeeManagementComponent
+    EmployeeManagementComponent,
+    ReceiveOrderComponent,
+    StorageDeliveryFormComponent,
+    DeliveryFormComponent,
+    SendingOrderComponent,
+    ShippingOrderComponent,
+    CurrentOrderComponent,
+    StorageReceivedOrderComponent,
+    StorageSentOrderComponent,
+    ManagerStorageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

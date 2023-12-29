@@ -7,7 +7,7 @@ import { DirectorService } from 'src/app/service/director/director.service';
 @Component({
   selector: 'app-statistical-storage',
   templateUrl: './statistical-storage.component.html',
-  styleUrls: ['../home/manager-storage.component.css']
+  styleUrls: ['./statistical-storage.component.css']
 })
 
 export class StatisticalStorageComponent implements OnInit {

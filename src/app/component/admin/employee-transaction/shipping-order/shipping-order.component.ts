@@ -1,19 +1,21 @@
-import { EmployeeService } from './../../../../service/employee/employee.service';
 import { Component, OnInit } from '@angular/core';
+import { PackageDelivery } from 'src/app/entity/package_delivery';
 import { Transaction } from 'src/app/entity/transaction';
 import { TransactionId } from 'src/app/entity/transaction-id';
 import { DirectorService } from 'src/app/service/director/director.service';
+import { EmployeeService } from 'src/app/service/employee/employee.service';
 import { ManagerService } from 'src/app/service/manager/manager.service';
 
 @Component({
-  selector: 'app-employee-statistical',
-  templateUrl: "./employee-statistical.component.html",
-  styleUrls: ['./employee-statistical.component.css']
+  selector: 'app-shipping-order',
+  templateUrl: './shipping-order.component.html',
+  styleUrls: ['./shipping-order.component.css']
 })
-export class EmployeeStatisticalComponent implements OnInit {
+export class ShippingOrderComponent implements OnInit {
 
-  tmp = '';
-    allTransactions: Transaction[] = [];
+    shippingStatus: string = '';
+    tmp = '';
+    allShippingTransactions: PackageDelivery[] = [];
     username: string | null = '';
     transaction_id!: TransactionId;
     constructor(private directorService: DirectorService, private managerService: ManagerService, private employeeService: EmployeeService) { 
@@ -30,12 +32,39 @@ export class EmployeeStatisticalComponent implements OnInit {
           console.log(this.transaction_id.officeId);
 
           // Get all orders of a storage
-          this.directorService.getAllTransactionsOfTransaction(this.transaction_id.officeId).subscribe(
+          this.employeeService.getPackageDelivering().subscribe(
             data => {
               console.log(data);
-              this.allTransactions = data;
+              this.allShippingTransactions = data;
             }
           )
+        }
+      )
+    }
+
+    onShippingStatusChange(orderCode: string) {
+      if (this.shippingStatus === 'Đã giao hàng') {
+        this.confirmPackageDelivered(orderCode);
+        console.log(this.shippingStatus);
+      } else if (this.shippingStatus === 'Giao hàng thất bại') {
+        this.confirmNotDelivered(orderCode);
+        console.log(this.shippingStatus);
+      }
+    }
+
+    confirmPackageDelivered(orderCode: string) {
+      this.employeeService.confirmDelivered(orderCode).subscribe(
+        data => {
+          console.log(data);
+          alert("Đã xác nhận giao hàng");
+        }
+      )
+    }
+    confirmNotDelivered(orderCode: string) {
+      this.employeeService.confirmNotDelivered(orderCode).subscribe(
+        data => {
+          console.log(data);
+          alert("Đã xác nhận giao hàng");
         }
       )
     }
@@ -74,5 +103,4 @@ export class EmployeeStatisticalComponent implements OnInit {
       }
       return i.toString();
     }
-  
 }
