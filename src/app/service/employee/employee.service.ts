@@ -15,7 +15,7 @@ import { Transaction } from 'src/app/entity/transaction';
 export class EmployeeService {
   private baseUrl = "http://localhost:8080/api/v1/employee";
   private customerUrl = "http://localhost:8080/api/v1/customer";
-
+  private baseUrlEmployee = "http://localhost:8080/api/v1/employee";
   //API tỉnh thành phố 
   private baseUrlCity = "https://thongtindoanhnghiep.co/api/city";
   username: string | null = '';
@@ -44,7 +44,14 @@ export class EmployeeService {
     return this.httpClient.get<Customer[]>(`${this.customerUrl}/phone?phone=${phone}`, { headers: this.headers });
   }
   
+  createEmployee(employee: any, role: number): Observable<any> {
+    console.log(`${this.baseUrlEmployee}/role/${role}`)
+    return this.httpClient.post<any>(`${this.baseUrlEmployee}/role/${role}`, employee, { headers: this.headers });
+  }
 
+  updateEmployee(employee: any, role: number): Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrlEmployee}/${employee.id}/role/${role}/update`, employee, { headers: this.headers });
+  }
 
 
   // getStorageIdByUsername(username: string | null): Observable<StorageId> {

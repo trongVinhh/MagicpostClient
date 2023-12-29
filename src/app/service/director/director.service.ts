@@ -12,6 +12,7 @@ import { Transaction } from 'src/app/entity/transaction';
   providedIn: 'root'
 })
 export class DirectorService {
+  private urlGetCustomer = "http://localhost:8080/api/v1/customer";
   private baseUrl = "http://localhost:8080/api/v1/director"
   username: string | null = '';
 
@@ -22,7 +23,11 @@ export class DirectorService {
         this.username = sessionStorage.getItem('username');
     }
     return this.username;
-  }      
+  }
+  
+  getCustomers() {
+    return this.httpClient.get<any>(`${this.urlGetCustomer}`, {headers: this.headers});
+  }
   
   // Use accessToken to make a request
   token = sessionStorage.getItem('token');

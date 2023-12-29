@@ -5,4 +5,5 @@ export interface Order {
   currentStorageName: string;
   currentStorageAddress: string
   transaction: Transaction;
+  status: string;
 }

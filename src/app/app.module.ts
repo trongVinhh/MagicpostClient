@@ -28,6 +28,11 @@ import { ContactComponent } from './component/contact/contact.component';
 import { StatisticalStorageComponent } from './component/admin/manager-storage/statistical-storage/statistical-storage.component';
 import { StatisticalTransactionComponent } from './component/admin/manager-transaction/statistical-transaction/statistical-transaction.component';
 import { EmployeeManagementComponent } from './component/admin/director/employee-management/employee-management.component';
+import { AddemployeeComponent } from './component/admin/manager-storage/addemployee/addemployee.component';
+import { CreateEmployeeComponent } from './component/admin/director/create-employee/create-employee.component';
+import { InsertEmployeeComponent } from './component/admin/manager-transaction/insert-employee/insert-employee.component';
+import { UpdateEmployeeComponent } from './component/admin/manager-storage/update-employee/update-employee.component';
+import { UpdateEmplComponent } from './component/admin/manager-transaction/update-empl/update-empl.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tracking', pathMatch: 'full' },
@@ -49,8 +54,8 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
   },
-  
-  { path: 'employee-storage', component: EmployeeStorageComponent },
+  {path: 'manager-storage/update-employee', component: UpdateEmployeeComponent},
+  { path: 'employee-storage/home', component: EmployeeStorageComponent },
   {path: 'aboutUs', component: AboutUsComponent},
   {path: 'service', component: ServiceComponent},
   { path: 'contact', component: ContactComponent},  
@@ -60,21 +65,33 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_MANAGER_TRANSACTION'] }
   },
-
+  {path: 'manager-transaction/create-employee', component: InsertEmployeeComponent},
+  {path: 'manager-transaction/update-employee', component: UpdateEmplComponent},
   { 
     path: 'manager-transaction/transactions', 
     component: StatisticalTransactionComponent,
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_MANAGER_TRANSACTION'] }
   },
-
   { 
     path: 'manager-storage/home', 
     component: ManagerStorageComponent,
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_MANAGER_STORAGE'] }
   },
-
+  { 
+    path: 'manager-storage', 
+    component: ManagerStorageComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_MANAGER_STORAGE'] }
+  },
+  { 
+    path: 'manager-storage/create-employee', 
+    component: AddemployeeComponent,
+    canActivate: [AuthGuardService],
+    data: { expectedRole: ['ROLE_MANAGER_STORAGE'] }
+  },
+  
   { 
     path: 'manager-storage/orders', 
     component: StatisticalStorageComponent,
@@ -125,7 +142,17 @@ const routes: Routes = [
     AboutUsComponent,
     ServiceComponent,
     ContactComponent,
-    EmployeeManagementComponent
+    EmployeeManagementComponent,
+    StatisticalStorageComponent,
+    StatisticalTransactionComponent,
+    ManagerTransactionComponent,
+    EmployeeStatisticalComponent,
+    EmployeeTransactionComponent,
+    AddemployeeComponent,
+    CreateEmployeeComponent,
+    InsertEmployeeComponent,
+    UpdateEmployeeComponent,
+    UpdateEmplComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
