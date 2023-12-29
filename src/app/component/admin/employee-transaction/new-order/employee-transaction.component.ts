@@ -2,6 +2,7 @@ import { filter } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Customer } from 'src/app/entity/customer';
 import District from 'src/app/entity/district';
 import Province from 'src/app/entity/province';
@@ -21,7 +22,9 @@ export class EmployeeTransactionComponent implements OnInit {
   newOrder!: Transaction;
   createdCustomer!: Customer;
 
-  constructor(private httpClient: HttpClient, private formBuilder: FormBuilder, private employeeService: EmployeeService, private customerService: CustomerService) { 
+  constructor(private httpClient: HttpClient, private formBuilder: FormBuilder, 
+    private employeeService: EmployeeService, private customerService: CustomerService,
+    private router: Router) { 
     this.newCustomer = {} as Customer;
     this.newOrder = {} as Transaction;
   }
@@ -55,7 +58,7 @@ export class EmployeeTransactionComponent implements OnInit {
   }
 
   onSubmit() {
-    this.newCustomer.firstName = "Trần";
+    this.newCustomer.firstName = "";
     this.newCustomer.lastName = this.orderForm.get('senderName')?.value;
     this.newCustomer.phone = this.orderForm.get('senderPhone')?.value;
     this.newCustomer.address = this.orderForm.get('senderWard')?.value + " - " + this.orderForm.get('senderDistrict')?.value + " - " + this.orderForm.get('senderProvince')?.value;
@@ -72,9 +75,11 @@ export class EmployeeTransactionComponent implements OnInit {
     this.newOrder.employeeId = sessionStorage.getItem('employeeId') || "";
     this.newOrder.transactionOfficeId = "1";
 
-    console.log(this.newOrder)
+    // console.log(this.newOrder)
     this.createNewOrder(this.newCustomer, this.newOrder);
-
+    sessionStorage.setItem('newOrder', JSON.stringify(this.newOrder));
+    sessionStorage.setItem('newCustomer', JSON.stringify(this.newCustomer));
+    this.router.navigate(['/employee-transaction/bill']);
   }
 
 
@@ -82,6 +87,7 @@ export class EmployeeTransactionComponent implements OnInit {
     order.customerDto = customer;
     this.employeeService.createTransaction(order).subscribe(response => {
       console.log('Transaction created', response);
+      alert("Đã tạo đơn hàng thành công");
     });
   }
   

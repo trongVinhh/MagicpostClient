@@ -1,0 +1,100 @@
+<div class="container">
+    <div id="box">
+        <h2>Phiếu đơn hàng của bạn</h2>
+        <button (click)="printBill()">In phiếu</button>
+        <a href="" routerLink="/employee-transaction/createOrder">Trở về</a>
+    </div>
+    
+    <table border="1">
+        <header></header>
+        <tr>
+            <td colspan="4" style="background-color: #f2f2f2;">
+                <h1>Phiếu gửi hàng</h1>
+            </td>
+        <tr>
+            <td colspan="2">
+                <h2>Magic Post</h2>
+            </td>
+            <td colspan="2" style="display: flex;">
+                <div>
+                    
+                </div>
+                <div>
+                    <img [src]="qrCodeUrl" alt="QR Code" width="150px" height="150px">
+                </div>
+                <!-- <qrcode [qrdata]="order" [width]="256" [errorCorrectionLevel]="'M'"></qrcode> -->
+            </td>
+        <tr>
+            <td colspan="2">
+                <h3>Thông tin người gửi</h3>
+                <div>
+                    <span>Họ tên : {{customer.firstName  + customer.lastName}}</span>
+                </div>
+                <div>
+                    <span>Số điện thoại: {{customer.phone}}</span>
+                </div>
+                <div>
+                    <span>Địa chỉ: {{customer.address}}</span>
+                </div>
+            </td>
+            <td colspan="2">
+                <h3>Thông tin người nhận</h3>
+                <div>
+                    <span>Họ tên : {{order.receiverName}}</span>
+                </div>
+                <div>
+                    <span>Số điện thoại: {{order.phoneNumber}}</span>
+                </div>
+                <div>
+                    <span>Địa chỉ: {{order.receiveAddress}}</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h3>Thông tin đơn hàng</h3>
+                <div>
+                    <span>Mã đơn hàng: {{order.orderCode}}</span>
+                </div>
+                <div>
+                    <span>Khối lượng: {{order.mass}}</span>
+                </div>
+                <div>
+                    <span>Loại hàng: {{order.packageType}}</span>
+                </div>
+                <div>
+                    <span>Tổng tiền: {{order.totalPrice}}</span>
+                </div>
+            </td>
+            <td colspan="2">
+                <div>
+                    <span>Cước phí: {{order.postage}}</span>
+                </div>
+                <div>
+                    <span>Mã nhân viên giao dịch: {{order.employeeId}}</span>
+                </div>
+                <div>
+                    <span>Mã quầy giao dịch: {{order.transactionOfficeId}}</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h2>Cam kết</h2>
+                <p>Tôi chấp nhận mọi điều khoản của phiếu gửi và cam </p>
+                <p>đoan những mặt hàng này không chứa những loại hàng cấm</p>
+            </td>
+            <td colspan="2">
+                <h2>Bưu cục chấp nhận</h2>
+            </td>
+        </tr>
+        <tr style="height: 120px; position: relative;">
+            <td colspan="2" >
+                <h2 style="position: absolute; top: 0; margin-top: 5px;">Người gửi kí</h2>
+            </td>
+            <td colspan="2" >
+                <h2 style="position: absolute;  top: 0; margin-top: 5px;">Người nhận kí</h2>
+            </td>
+        </tr>
+    </table>
+</div>

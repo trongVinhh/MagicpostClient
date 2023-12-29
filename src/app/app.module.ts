@@ -41,6 +41,8 @@ import { DeliveryFormComponent } from './component/admin/employee-transaction/de
 import { StorageSentOrderComponent } from './component/admin/employee-storage/storage-sent-order/storage-sent-order.component';
 import { CurrentOrderComponent } from './component/admin/employee-transaction/current-order/current-order.component';
 import { ManagerStorageComponent } from './component/admin/manager-storage/employee-management/manager-storage.component';
+import { UpdateStaffComponent } from './component/admin/director/update-staff/update-staff.component';
+import { BillComponent } from './component/admin/employee-transaction/bill/bill.component';
 import { DetailStorageComponent } from './component/admin/director/detail-storage/detail-storage.component';
 
 const routes: Routes = [
@@ -87,7 +89,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     data: { expectedRole: ['ROLE_EMPLOYEE_TRANSACTION'] }
   },
-
+  { path: 'employee-transaction/bill', component: BillComponent},
   { 
     path: 'employee-transaction/shippingOrder',
     component: ShippingOrderComponent,
@@ -117,7 +119,8 @@ const routes: Routes = [
   {path: 'aboutUs', component: AboutUsComponent},
   {path: 'service', component: ServiceComponent},
   { path: 'contact', component: ContactComponent}, 
-
+  { path: 'director/employee-management', component: EmployeeManagementComponent},
+  { path: 'director/update-staff', component: UpdateStaffComponent},
   { 
     path: 'manager-transaction/home', 
     component: ManagerTransactionComponent,
@@ -164,7 +167,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService], 
     data: { expectedRole: ['ROLE_ADMIN'] }
   },
-
+  { path: 'director/create-manager', component: CreateEmployeeComponent },
   { 
     path: 'director/storage-offices', 
     component: StorageOfficeComponent, 
@@ -225,6 +228,8 @@ const routes: Routes = [
     ManagerStorageComponent,
     DirectorComponent,
     AddEmployeeComponent,
+    UpdateStaffComponent,
+    BillComponent,
     DetailStorageComponent
   ],
   imports: [

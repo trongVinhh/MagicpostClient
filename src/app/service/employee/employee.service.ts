@@ -44,6 +44,10 @@ export class EmployeeService {
     return this.httpClient.get<Customer[]>(`${this.customerUrl}/phone?phone=${phone}`, { headers: this.headers });
   }
 
+  getAllEmpployees(): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrlEmployee}`, { headers: this.headers });
+  }
+
   createEmployee(employee: any, role: number): Observable<any> {
     console.log(`${this.baseUrlEmployee}/role/${role}`)
     return this.httpClient.post<any>(`${this.baseUrlEmployee}/role/${role}`, employee, { headers: this.headers });

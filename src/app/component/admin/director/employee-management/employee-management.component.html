@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="./employee-management.component.css">
+  <link rel="stylesheet" type="text/css" >
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -41,6 +41,7 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://png.pngtree.com/png-clipart/20190614/original/pngtree-web-page-ui-default-avatar-handsome-guy-png-image_3801746.jpg">
     <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://png.pngtree.com/png-clipart/20190614/original/pngtree-web-page-ui-default-avatar-handsome-guy-png-image_3801746.jpg"
         width="50px" alt="User Image">
       <div>
@@ -75,88 +76,68 @@
         </a>
     </li>
   </ul>
+  </div>
   </aside>
   <main class="app-content">
     <div class="app-title">
-      <ul class="app-breadcrumb breadcrumb">
-        <li class="breadcrumb-item">Danh sách đơn hàng</li>
-        <li class="breadcrumb-item"><a href="#">Thêm đơn hàng</a></li>
+      <ul class="app-breadcrumb breadcrumb side">
+        <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhân viên hiện có tại hệ thống</b></a></li>
       </ul>
+      <div id="clock"></div>
     </div>
+
     <div class="row">
       <div class="col-md-12">
         <div class="tile">
-          <h2 class="tile-title">Tạo đơn hàng mới của khách hàng</h2>
           <div class="tile-body">
-            <form class="row" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
-                <!-- Thông tin người gửi -->
-                <div class="form-group  col-md-6">
-                  <label class="control-label">Tên nhân viên</label>
-                  <input class="form-control" type="text" formControlName="senderName">
-                </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">Số điện thoại</label>
-                  <input class="form-control" type="string" formControlName="senderPhone">
-                </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">Email</label>
-                  <input class="form-control" type="email" formControlName="senderEmail">
-                </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">Tên đăng nhập</label>
-                  <input class="form-control" type="email" formControlName="senderEmail">
-                </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">Mật khẩu</label>
-                  <input class="form-control" type="email" formControlName="senderEmail">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="exampleSelect1" class="control-label">Miền</label>
-                  <select class="form-control" id="exampleSelect1" name="region" [(ngModel)]="regionCode"
-                    (ngModelChange)="getProvinceList()" formControlName="senderRegion">
-                    <option [value]="0">-- Chọn miền --</option>
-                    <option [value]=(1)>Miền Bắc</option>
-                    <option [value]=(2)>Miền Trung</option>
-                    <option [value]=(3)>Miền Nam</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="exampleSelect1" class="control-label">Tỉnh/Thành phố</label>
-                  <select class="form-control" id="exampleSelect1" name="province" [(ngModel)]="provinceCode"
-                    (ngModelChange)="getDistrictList()" formControlName="senderProvince">
-                    <option [value]="0">-- Chọn tỉnh/thành phố --</option>
-                    <option *ngFor="let province of filteredProvinceList" [value]="province.name">{{province.name}}
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group  col-md-6">
-                  <label for="exampleSelect1" class="control-label">Quận/Huyện</label>
-                  <select class="form-control" id="exampleSelect1" name="district" [(ngModel)]="districtCode"
-                    (ngModelChange)="getWardList()" formControlName="senderDistrict">
-                    <option [value]="0">-- Chọn quận/huyện --</option>
-                    <option *ngFor="let district of filteredDistrictList" [value]="district.name">{{district.name}}
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group  col-md-6">
-                  <label for="exampleSelect1" class="control-label">Phường/Xã</label>
-                  <select class="form-control" id="exampleSelect1" name="ward" formControlName="senderWard">
-                    <option>-- Chọn phường/xã --</option>
-                    <option *ngFor="let ward of filteredWardList">{{ward.name}}</option>
-                  </select>
-                </div>
-              
-              <div style="text-align: right;">
-                <button class="btn btn-save mx-2" type="submit">Lưu lại</button>
-                <a class="btn btn-cancel" href="">Hủy bỏ</a>
+
+            <div class="row element-button">
+              <div class="col-sm-2">
+
+                <a class="btn btn-add btn-sm" href="../addemployee/addemployee.component.html" [routerLink]="'/director/create-manager'" title="Thêm"><i class="fas fa-plus"></i>
+                  Tạo mới nhân viên</a>
               </div>
+              
 
-            </form>
+              <div class="col-sm-2">
+                <a class="btn btn-delete btn-sm print-file" type="button" title="In" (click)="printTable()"><i
+                    class="fas fa-print"></i> In dữ liệu</a>
+              </div>
+              
+            </div>
+            <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+              id="sampleTable">
+              <thead>
+                <tr>
+                  <th>ID nhân viên</th>
+                  <th width="150">Họ và tên</th>
+                  <th width="250">Địa chỉ</th>
+                  <th>SĐT</th>
+                  <th>Email</th>
+                  <th>Chức vụ</th>
+                  <th width="100">Tính năng</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <tr *ngFor="let employee of employees">
+                  <td>{{employee.id}}</td>
+                  <td>{{employee.firstName}} {{employee.lastName}}</td>
+                  <td>{{employee.address}}</td>
+                  <td>{{employee.phone}}</td>
+                  <td>{{employee.email}}</td>
+                  <td>{{employee.role[0].name}}</td>
+                  <td class="table-td-center">
+                    <button class="btn btn-primary btn-sm trash" style="margin: 2px;" type="button" title="Xóa" (click)="checkClick(employee)"><i
+                      class="fas fa-trash-alt"></i> </button>
+                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" (click)="displayForm(employee)"><i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
           </div>
-
-
-          
-
         </div>
       </div>
     </div>

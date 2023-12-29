@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import District from 'src/app/entity/district';
 import { Employee } from 'src/app/entity/employee';
 import Province from 'src/app/entity/province';
+import { StorageId } from 'src/app/entity/storage-id';
+import { StorageOffices } from 'src/app/entity/storage-offices';
 import Ward from 'src/app/entity/ward';
 import { CustomerService } from 'src/app/service/customer/customer.service';
 import { EmployeeService } from 'src/app/service/employee/employee.service';
@@ -12,44 +15,44 @@ import { EmployeeService } from 'src/app/service/employee/employee.service';
   selector: 'app-employee-management',
   templateUrl: './employee-management.component.html',
   styleUrls: ['./employee-management.component.css']
-  
+
 })
 export class EmployeeManagementComponent implements OnInit {
+
 
   employeeForm: FormGroup = new FormGroup({});
   newEmployee!: Employee;
   createdCustomer!: Employee;
 
-  constructor(private httpClient: HttpClient, private formBuilder: FormBuilder, private employeeService: EmployeeService, private customerService: CustomerService) { 
+  constructor(private httpClient: HttpClient,private routerr: Router, private formBuilder: FormBuilder, private employeeService: EmployeeService, private customerService: CustomerService) {
     this.newEmployee = {} as Employee;
   }
 
   ngOnInit(): void {
-    this.getAllProvince();
-    this.getAllDistrict();
-    this.getAllWard();
-    
-    this.employeeForm = this.formBuilder.group({
-      senderName: [''],
-      senderPhone: [''],
-      senderEmail: [''],
-      senderRegion: [''],
-      senderProvince: [''],
-      senderDistrict: [''],
-      senderWard: [''],
-      receiverName: [''],
-      receiverPhone: [''],
-      receiverRegion: [''],
-      receiverProvince: [''],
-      receiverDistrict: [''],
-      receiverWard: [''],
-      orderCode: [''],
-      packageType: [''],
-      mass: [''],
-      postage: [''],
-      extraFee: [''],
-      totalPrice:['']
-    });
+    this.getAllEmployee();
+  }
+
+  getAllEmployee() {
+    this.employeeService.getAllEmpployees().subscribe(
+      data => {
+        console.log(data);
+        if (data != null) {
+          this.employees = data;
+        }
+      }
+    )
+  }
+
+  printTable() {
+    throw new Error('Method not implemented.');
+  }
+  displayForm(employee: any) {
+    this.selectedEmployee = employee;
+    sessionStorage.setItem('selectedEmployee', JSON.stringify(this.selectedEmployee));
+    this.routerr.navigate(['/director/update-staff']);
+  }
+  checkClick(_t83: any) {
+    throw new Error('Method not implemented.');
   }
 
   onSubmit() {
@@ -86,6 +89,14 @@ export class EmployeeManagementComponent implements OnInit {
   separateRegion = [[1, 37], [38, 68], [70, 96]];
   limitProvince: number[] = [];
 
+  flag = false;
+  tmp = '';
+  storage!: StorageOffices;
+  username: string | null = '';
+  storage_id!: StorageId;
+  id!: string;
+  employees!: any;
+  selectedEmployee!: any;
 
   //Lấy region code và lọc tỉnh thành theo region code
   getProvinceList() {
@@ -102,7 +113,7 @@ export class EmployeeManagementComponent implements OnInit {
     });
     console.log(this.filteredProvinceList);
   }
-  
+
   //
   getProvinceCode(provinceName: string): number {
     for (let province of this.filteredProvinceList) {
@@ -113,7 +124,7 @@ export class EmployeeManagementComponent implements OnInit {
     return 0;
   }
 
-  
+
   getDistrictList() {
     this.filteredDistrictList = this.districtList.filter((district: District) => {
       return district.province_code == this.getProvinceCode(this.employeeForm.get('senderProvince')?.value);
@@ -121,7 +132,7 @@ export class EmployeeManagementComponent implements OnInit {
 
     console.log(this.filteredDistrictList);
   }
-  
+
   getDistrictCode(districtName: string): number {
     for (let district of this.filteredDistrictList) {
       if (district.name == districtName) {
